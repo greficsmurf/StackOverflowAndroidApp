@@ -1,0 +1,32 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.StackExchange" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryVariant">@color/teal_700</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/black</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="bottomNavigationStyle">@style/Theme.StackExchange.BottomNavigationView</item>
+        <item name="progressIndicatorStyle">@style/Theme.StackExchange.ProgressIndicator</item>
+        <item name="tabStyle">@style/Theme.StackExchange.TabLayout</item>
+    </style>
+    <style name="Theme.StackExchange.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemBackground">@color/white</item>
+        <item name="itemIconTint">@color/green_light</item>
+        <item name="itemTextColor">@color/green_light</item>
+        <item name="background">?attr/selectableItemBackground</item>
+    </style>
+    <style name="Theme.StackExchange.ProgressIndicator" parent="Widget.MaterialComponents.ProgressIndicator.Linear.Indeterminate">
+        <item name="indicatorColor">@color/purple_500</item>
+    </style>
+    <style name="Theme.StackExchange.TabLayout" parent="Widget.MaterialComponents.TabLayout">
+        <item name="tabIndicatorColor">@color/green_light</item>
+        <item name="tabTextColor">@color/green_light</item>
+    </style>
+</resources>

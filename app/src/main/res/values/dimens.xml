@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="counter_rect_width">70dp</dimen>
+    <dimen name="counter_rect_height">40dp</dimen>
+
+    <dimen name="small_borders_width">1dp</dimen>
+    <dimen name="default_border_radius">5dp</dimen>
+</resources>

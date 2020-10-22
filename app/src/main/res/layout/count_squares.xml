@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="voteCount"
+            type="String" />
+        <variable
+            name="answerCount"
+            type="String" />
+        <variable
+            name="viewCount"
+            type="String" />
+        <variable
+            name="isAnswered"
+            type="Boolean" />
+    </data>
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+        <TextView
+            android:id="@+id/votes"
+            android:background="@drawable/borders_drawable"
+            android:layout_width="@dimen/counter_rect_width"
+            android:layout_height="@dimen/counter_rect_height"
+            android:gravity="center"
+            android:text="@{voteCount}"
+            android:layout_marginRight="1dp"
+            tools:text="-1"
+            android:layout_marginEnd="1dp" />
+
+        <TextView
+            android:id="@+id/votes_title"
+            android:layout_width="@dimen/counter_rect_width"
+            android:layout_height="wrap_content"
+            android:text="@string/votes_square_title"
+            tools:text="votes"
+            android:gravity="center"
+            android:layout_below="@id/votes"
+            android:layout_alignLeft="@id/votes"
+            android:layout_alignStart="@id/votes" />
+
+        <TextView
+            android:id="@+id/answer"
+            android:layout_width="@dimen/counter_rect_width"
+            android:layout_height="@dimen/counter_rect_height"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@+id/votes"
+            android:text="@{answerCount}"
+            android:isAnswered="@{isAnswered}"
+            android:layout_toEndOf="@id/votes"
+            android:layout_toRightOf="@id/votes"
+            android:layout_marginRight="1dp"
+            android:background="@drawable/borders_drawable"
+
+            tools:text="1"
+            android:layout_marginEnd="1dp" />
+
+        <TextView
+            android:id="@+id/answers_title"
+            android:layout_width="@dimen/counter_rect_width"
+            android:layout_height="wrap_content"
+            android:text="@string/answers_square_title"
+            tools:text="answers"
+            android:gravity="center"
+            android:layout_below="@id/answer"
+            android:layout_alignLeft="@id/answer"
+            android:layout_toRightOf="@id/votes_title"
+            android:layout_toEndOf="@id/votes_title"
+            android:layout_alignStart="@id/answer" />
+
+        <TextView
+            android:id="@+id/views"
+            android:layout_width="@dimen/counter_rect_width"
+            android:layout_height="@dimen/counter_rect_height"
+            android:gravity="center"
+            android:layout_toEndOf="@id/answer"
+            android:layout_toRightOf="@id/answer"
+            android:text="@{viewCount}"
+            android:background="@drawable/borders_drawable"
+
+            tools:text="9" />
+
+        <TextView
+            android:id="@+id/views_title"
+            android:layout_width="@dimen/counter_rect_width"
+            android:layout_height="wrap_content"
+            android:text="@string/views_square_title"
+            tools:text="views"
+            android:gravity="center"
+            android:layout_below="@id/views"
+            android:layout_toRightOf="@id/answers_title"
+            android:layout_toEndOf="@id/answers_title"
+            android:layout_alignLeft="@id/views"
+            android:layout_alignStart="@id/views" />
+
+    </RelativeLayout>
+</layout>
