@@ -5,4 +5,6 @@
 
     <dimen name="small_borders_width">1dp</dimen>
     <dimen name="default_border_radius">5dp</dimen>
+
+    <dimen name="progress_indicator_height">2.5dp</dimen>
 </resources>

@@ -9,4 +9,7 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <attr name="error_drawable" format="reference"/>
+    <attr name="toolbar_color" format="reference"/>
+
 </resources>

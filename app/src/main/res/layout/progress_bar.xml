@@ -11,7 +11,7 @@
     <merge>
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="2.5dp">
+            android:layout_height="@dimen/progress_indicator_height">
 
             <com.google.android.material.progressindicator.ProgressIndicator
                 android:layout_width="match_parent"
@@ -21,6 +21,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
         </FrameLayout>
         <FrameLayout
             android:isErrorVisible="@{resource.status}"

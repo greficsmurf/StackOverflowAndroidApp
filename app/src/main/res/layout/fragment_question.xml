@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="com.example.stackexchange.vo.Resource"/>
+        <variable
+            name="viewModel"
+            type="com.example.stackexchange.ui.question.QuestionViewModel" />
+    </data>
     <LinearLayout
         android:orientation="vertical"
         xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <WebView
-            android:id="@+id/question_web_view"
+        <include
+            app:resource="@{(Resource) viewModel.pageResource}"
+            layout="@layout/progress_bar"/>
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/page_refresher"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <WebView
+                    android:id="@+id/question_web_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </androidx.core.widget.NestedScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </LinearLayout>
 </layout>

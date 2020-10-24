@@ -13,7 +13,7 @@
         android:layout_gravity="center"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/ic_error_outline_24px" />
+        android:src="?attr/error_drawable" />
 
     <TextView
         android:id="@+id/textView2"

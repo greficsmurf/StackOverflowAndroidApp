@@ -4,9 +4,10 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.MaterialToolbar
 
         android:id="@+id/toolbar"
+        android:background="?attr/toolbar_color"
         android:layout_width="match_parent"
         app:layout_scrollFlags="scroll|enterAlways"
         android:layout_height="?attr/actionBarSize" />
