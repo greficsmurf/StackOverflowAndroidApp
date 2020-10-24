@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 
 data class SearchQuestion(
         val tags: List<String>,
-        val owner: UserApi,
+        val owner: User,
         val isAnswered: Boolean,
         val viewCount: Long,
         val answerCount: Long,

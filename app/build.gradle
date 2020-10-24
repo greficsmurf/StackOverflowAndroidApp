@@ -101,7 +101,7 @@ dependencies {
     kapt "androidx.room:room-compiler:$room"
 
     // optional - Kotlin Extensions and Coroutines support for Room
-//    implementation "androidx.room:room-ktx:$room"
+    implementation "androidx.room:room-ktx:$room"
 
     // optional - Test helpers
 //    testImplementation "androidx.room:room-testing:$room"
@@ -109,7 +109,7 @@ dependencies {
     //Material design
     implementation "com.google.android.material:material:$material"
 
-//    implementation "com.beust:klaxon:$klaxon"
+    implementation "com.beust:klaxon:$klaxon"
 
 //    implementation "com.elyeproj.libraries:loaderviewlibrary:$textviewloader"
 

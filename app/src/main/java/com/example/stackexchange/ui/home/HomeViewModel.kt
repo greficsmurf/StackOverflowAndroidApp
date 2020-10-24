@@ -13,11 +13,11 @@ class HomeViewModel @Inject constructor(
     private val _questionSort = MutableLiveData<QuestionSort>()
 
     val questionsResource = _questionSort.switchMap {
-        homeRepo.getAllQuestions(20, it).asLiveData()
+        homeRepo.getHomeQuestionsResource(20, it).asLiveData()
     }
 
     val questions = questionsResource.map {
-        it.data?.questions
+        it.data
     }
 
     fun refresh(){

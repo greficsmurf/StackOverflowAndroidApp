@@ -6,6 +6,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
+import timber.log.Timber
 import java.lang.Exception
 
 abstract class NetworkDatabaseResource<ApiT, DbT, DomainT> {
@@ -15,11 +16,15 @@ abstract class NetworkDatabaseResource<ApiT, DbT, DomainT> {
             try{
                 fetchDb().collect { dbData ->
                     if(shouldFetchApi(dbData)){
+                        Timber.d("fetched API")
                         val domainData = toDomainModelApi(fetchApi())
                         onDbSave(domainData)
                     }
                     else
+                    {
+                        Timber.d("fetched DATABASE")
                         emit(Resource.loaded(toDomainModelDb(dbData)))
+                    }
                 }
             }catch (e: Exception){
                 emit(Resource.failed(null, e.message ?: ""))
@@ -38,5 +43,5 @@ abstract class NetworkDatabaseResource<ApiT, DbT, DomainT> {
     abstract fun toDomainModelApi(data: ApiT): DomainT
 
     abstract fun shouldFetchApi(data: DbT?): Boolean
-    abstract fun onDbSave(data: DomainT)
+    abstract suspend fun onDbSave(data: DomainT)
 }

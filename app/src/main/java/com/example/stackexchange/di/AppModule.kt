@@ -41,4 +41,12 @@ class AppModule{
                 .create(StackOverflowService::class.java)
     }
 
+
+    @Singleton
+    @Provides
+    fun provideUserDao(db: AppDatabase) = db.getUserDao()
+
+    @Singleton
+    @Provides
+    fun provideSearchQuestionDao(db: AppDatabase) = db.getSearchQuestionDao()
 }
