@@ -54,7 +54,7 @@ class QuestionViewHolder(
             isAnswered = question.isAnswered
 
             layout.setOnClickListener {
-                navCallback.navigate(it.findNavController(), question.link)
+                navCallback.navigate(it.findNavController(), question.link, question.title)
 //                it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToQuestionFragment(question.link))
             }
 

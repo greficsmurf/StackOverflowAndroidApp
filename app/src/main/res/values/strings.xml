@@ -11,4 +11,8 @@
     <string name="views_square_title">views</string>
     <string name="answers_square_title">answers</string>
     <string name="votes_square_title">votes</string>
+
+
+    <string name="stackoverflow_domain">https://stackoverflow.com</string>
+    <string name="cookie_string">se-consent=%7b%22s%22%3a1%2c%22d%22%3a%222020-10-24T06%3a00%3a01.1106004Z%22%7d</string>
 </resources>

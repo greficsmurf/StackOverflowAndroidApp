@@ -1,6 +1,7 @@
 package com.example.stackexchange
 
 import android.os.Bundle
+import android.webkit.CookieManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -9,10 +10,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
-import kotlinx.android.synthetic.main.main_toolbar.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
@@ -36,7 +35,10 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         setSupportActionBar(toolbar)
         toolbar.setupWithNavController(navController, appBarConfig)
         bottomNavBar.setupWithNavController(navController)
+
+        CookieManager.getInstance().setCookie(getString(R.string.stackoverflow_domain), getString(R.string.cookie_string))
     }
+
 
     override fun supportFragmentInjector() = dispatchingAndroidInjector
 }

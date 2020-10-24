@@ -12,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.stackexchange.R
 import com.example.stackexchange.base.BaseFragment
 import com.example.stackexchange.databinding.FragmentQuestionBinding
+import java.net.CookieManager
 import javax.inject.Inject
 
 class QuestionFragment : BaseFragment(){
@@ -33,7 +34,9 @@ class QuestionFragment : BaseFragment(){
                 false
         )
 
-        binding.questionWebView.loadUrl(args.url)
+        binding.apply {
+            questionWebView.loadUrl(args.url)
+        }
 
         return binding.root
     }

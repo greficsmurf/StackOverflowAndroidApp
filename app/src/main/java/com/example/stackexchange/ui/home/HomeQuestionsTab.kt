@@ -48,8 +48,8 @@ class HomeQuestionsTab : BaseFragment() {
         vm.setQuestionSort(QuestionSort.sortList.getOrNull(sortPos))
         val questionsAdapter = QuestionsAdapter(
                 object : QuestionsAdapterNavCallback {
-                    override fun navigate(navController: NavController, url: String) {
-                        navController.navigate(HomeFragmentDirections.actionHomeFragmentToQuestionFragment(url))
+                    override fun navigate(navController: NavController, url: String, title: String) {
+                        navController.navigate(HomeFragmentDirections.actionHomeFragmentToQuestionFragment(url, title))
                     }
                 }
         )

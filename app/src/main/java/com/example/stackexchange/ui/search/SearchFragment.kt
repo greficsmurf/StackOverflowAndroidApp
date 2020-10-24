@@ -37,8 +37,8 @@ class SearchFragment : BaseFragment(){
                 false
         )
         val questionsAdapter = QuestionsAdapter(object : QuestionsAdapterNavCallback{
-            override fun navigate(navController: NavController, url: String) {
-                navController.navigate(SearchFragmentDirections.actionSearchFragmentToQuestionFragment(url))
+            override fun navigate(navController: NavController, url: String, title: String) {
+                navController.navigate(SearchFragmentDirections.actionSearchFragmentToQuestionFragment(url, title))
             }
         })
 

@@ -17,10 +17,13 @@
     <fragment
         android:id="@+id/questionFragment"
         android:name="com.example.stackexchange.ui.question.QuestionFragment"
-        android:label="QuestionFragment"
+        android:label="{title}"
         tools:layout="@layout/fragment_question">
         <argument
             android:name="url"
+            app:argType="string" />
+        <argument
+            android:name="title"
             app:argType="string" />
     </fragment>
 
