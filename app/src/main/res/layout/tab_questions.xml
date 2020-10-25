@@ -4,16 +4,16 @@
         <import type="com.example.stackexchange.vo.Resource"/>
 
         <variable
-            name="viewModel"
-            type="com.example.stackexchange.ui.home.HomeViewModel" />
+            name="resource"
+            type="Resource" />
     </data>
-    <FrameLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <include
-            app:resource="@{(Resource) viewModel.questionsResource}"
+            app:resource="@{(Resource) resource}"
             layout="@layout/progress_bar"/>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -27,5 +27,5 @@
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
-    </FrameLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

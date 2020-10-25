@@ -1,6 +1,7 @@
 package com.example.stackexchange.ui.home
 
 import androidx.lifecycle.*
+import androidx.paging.cachedIn
 import com.example.stackexchange.repo.HomeRepo
 import com.example.stackexchange.repo.QuestionSort
 import com.example.stackexchange.utils.forceRefresh
@@ -12,13 +13,13 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel(){
     private val _questionSort = MutableLiveData<QuestionSort>()
 
-    val questionsResource = _questionSort.switchMap {
-        homeRepo.getHomeQuestionsResource(20, it).asLiveData()
+    val questionsDataSource = _questionSort.switchMap {
+        homeRepo.getHomeQuestionsDataSource(20, it).cachedIn(viewModelScope)
     }
 
-    val questions = questionsResource.map {
-        it.data
-    }
+//    val questions = questionsResource.map {
+//        it.data
+//    }
 
     fun refresh(){
         _questionSort.forceRefresh()

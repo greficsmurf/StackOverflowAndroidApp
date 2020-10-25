@@ -7,15 +7,19 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.stackexchange.R
-import com.example.stackexchange.adapters.recycler.QuestionsAdapter
+import com.example.stackexchange.adapters.recycler.QuestionsPagedAdapter
 import com.example.stackexchange.base.BaseFragment
 import com.example.stackexchange.databinding.TabQuestionsBinding
 import com.example.stackexchange.interfaces.QuestionsAdapterNavCallback
 import com.example.stackexchange.repo.QuestionSort
+import com.example.stackexchange.utils.getResourceByLoadStates
 import kotlinx.android.synthetic.main.tab_questions.*
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class HomeQuestionsTab : BaseFragment() {
@@ -46,7 +50,7 @@ class HomeQuestionsTab : BaseFragment() {
 
         val vm = ViewModelProvider(this, vmFactory).get(sortPos.toString(), HomeViewModel::class.java)
         vm.setQuestionSort(QuestionSort.sortList.getOrNull(sortPos))
-        val questionsAdapter = QuestionsAdapter(
+        val questionsAdapter = QuestionsPagedAdapter(
                 object : QuestionsAdapterNavCallback {
                     override fun navigate(navController: NavController, url: String, title: String) {
                         navController.navigate(HomeFragmentDirections.actionHomeFragmentToQuestionFragment(url, title))
@@ -63,17 +67,21 @@ class HomeQuestionsTab : BaseFragment() {
                 vm.refresh()
 
             }
-            viewModel = vm
             lifecycleOwner = viewLifecycleOwner
         }
 
-        vm.questions.observe(viewLifecycleOwner, Observer { list ->
-            if (!list.isNullOrEmpty())
-            {
-                questionsAdapter.submitList(list)
+        vm.questionsDataSource.observe(viewLifecycleOwner, Observer { pageData ->
+            viewLifecycleOwner.lifecycleScope.launch {
+                questionsAdapter.submitData(pageData)
                 refresher.isRefreshing = false
             }
         })
+        viewLifecycleOwner.lifecycleScope.launch {
+            questionsAdapter.loadStateFlow.collect {
+                binding.resource = getResourceByLoadStates(it)
+            }
+        }
+
 
         return binding.root
     }

@@ -18,6 +18,7 @@
         <item name="tabStyle">@style/Theme.StackExchange.TabLayout</item>
 
         <item name="error_drawable">@drawable/ic_error_outline_24px</item>
+        <item name="settings_drawable">@drawable/ic_settings_24px</item>
         <item name="toolbar_color">@color/white</item>
     </style>
     <style name="Theme.StackExchange.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">

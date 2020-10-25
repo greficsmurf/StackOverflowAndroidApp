@@ -6,6 +6,7 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.example.stackexchange.api.models.UserApi
 import com.squareup.moshi.Json
+import java.util.*
 
 @Entity(tableName = "search_question")
 data class SearchQuestionDb(
@@ -25,5 +26,7 @@ data class SearchQuestionDb(
         val score: Int,
         val link: String,
         val title: String,
-        val sortId: Int
+        val sortId: Int,
+        val creationDate: Date,
+        val lastActivityDate: Date
 )

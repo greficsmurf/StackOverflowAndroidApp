@@ -1,6 +1,9 @@
 package com.example.stackexchange.ui.search
 
 import androidx.lifecycle.*
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.example.stackexchange.domain.models.SearchQuestion
 import com.example.stackexchange.domain.models.SearchQuestions
 import com.example.stackexchange.repo.SearchRepo
 import com.example.stackexchange.vo.Resource
@@ -14,16 +17,10 @@ class SearchViewModel @Inject constructor(
     val searchString: LiveData<String>
         get() = _searchString
 
-    val questionsResource = _searchString.switchMap {
-        if(it.isNotBlank())
-            repo.searchQuestions(it).asLiveData()
-        else
-            liveData { emit(Resource.loaded(SearchQuestions(listOf()))) }
+    val questionsDataSource = _searchString.switchMap {
+        repo.getSearchedQuestionsDataSource(it, 20).cachedIn(viewModelScope)
     }
 
-    val questions = questionsResource.map {
-        it.data
-    }
 
     fun setSearchText(searchText: String){
         if(_searchString.value != searchText)

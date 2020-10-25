@@ -8,14 +8,20 @@ import android.widget.EditText
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.stackexchange.R
-import com.example.stackexchange.adapters.recycler.QuestionsAdapter
+import com.example.stackexchange.adapters.recycler.QuestionsPagedAdapter
 import com.example.stackexchange.base.BaseFragment
 import com.example.stackexchange.databinding.FragmentSearchBinding
 import com.example.stackexchange.interfaces.QuestionsAdapterNavCallback
+import com.example.stackexchange.utils.getResourceByLoadStates
+import com.example.stackexchange.vo.Resource
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 import kotlin.concurrent.timerTask
@@ -36,7 +42,7 @@ class SearchFragment : BaseFragment(){
                 container,
                 false
         )
-        val questionsAdapter = QuestionsAdapter(object : QuestionsAdapterNavCallback{
+        val questionsAdapter = QuestionsPagedAdapter(object : QuestionsAdapterNavCallback{
             override fun navigate(navController: NavController, url: String, title: String) {
                 navController.navigate(SearchFragmentDirections.actionSearchFragmentToQuestionFragment(url, title))
             }
@@ -47,15 +53,20 @@ class SearchFragment : BaseFragment(){
                 layoutManager = LinearLayoutManager(context)
                 adapter = questionsAdapter
             }
-            viewModel = vm
             lifecycleOwner = viewLifecycleOwner
         }
 
-        vm.questions.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            it?.let {
-                questionsAdapter.submitList(it.questions)
+        vm.questionsDataSource.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            viewLifecycleOwner.lifecycleScope.launch {
+                questionsAdapter.submitData(it)
             }
         })
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            questionsAdapter.loadStateFlow.collect {
+                binding.resource = getResourceByLoadStates(it)
+            }
+        }
 
         return binding.root
     }

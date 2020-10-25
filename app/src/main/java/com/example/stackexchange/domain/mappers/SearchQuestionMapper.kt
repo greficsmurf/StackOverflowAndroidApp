@@ -5,6 +5,7 @@ import com.example.stackexchange.db.models.JoinSearchQuestionUserDb
 import com.example.stackexchange.db.models.SearchQuestionDb
 import com.example.stackexchange.domain.models.SearchQuestion
 import com.example.stackexchange.domain.models.User
+import java.util.*
 
 fun SearchQuestionApi.toDomainModel() = SearchQuestion(
         tags,
@@ -15,7 +16,9 @@ fun SearchQuestionApi.toDomainModel() = SearchQuestion(
         score,
         questionId,
         link,
-        title
+        title,
+        creationDate,
+        lastActivityDate
 )
 
 fun SearchQuestionDb.toDomainModel(owner: User) = SearchQuestion(
@@ -27,7 +30,9 @@ fun SearchQuestionDb.toDomainModel(owner: User) = SearchQuestion(
         score,
         searchQuestionId,
         link,
-        title
+        title,
+        creationDate,
+        lastActivityDate
 )
 
 fun SearchQuestion.toDbModel(sortId: Int = 0) = SearchQuestionDb(
@@ -40,7 +45,9 @@ fun SearchQuestion.toDbModel(sortId: Int = 0) = SearchQuestionDb(
         score,
         link,
         title,
-        sortId
+        sortId,
+        creationDate,
+        lastActivityDate
 )
 
 fun JoinSearchQuestionUserDb.toDomainModel() = SearchQuestion(
@@ -52,5 +59,7 @@ fun JoinSearchQuestionUserDb.toDomainModel() = SearchQuestion(
         searchQuestion.score,
         searchQuestion.searchQuestionId,
         searchQuestion.link,
-        searchQuestion.title
+        searchQuestion.title,
+        searchQuestion.creationDate,
+        searchQuestion.lastActivityDate
 )

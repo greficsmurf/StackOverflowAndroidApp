@@ -1,12 +1,17 @@
 package com.example.stackexchange.binding
 
 import android.graphics.Color
+import android.os.Build
 import android.view.View
 import android.widget.TextView
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.example.stackexchange.R
 import com.example.stackexchange.vo.ResourceStatus
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 @BindingAdapter("android:isVisible")
 fun setVisibility(view: View, isVisible: Boolean){
@@ -40,4 +45,8 @@ fun setAnsweredBackground(view: TextView, isAnswered: Boolean){
         view.setTextColor(Color.WHITE)
         view.background = ContextCompat.getDrawable(view.context, R.drawable.is_answered_drawable)
     }
+}
+
+fun setThemeSwitch(view: SwitchCompat, themeMode: Int?){
+
 }

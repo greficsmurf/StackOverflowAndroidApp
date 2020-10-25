@@ -19,6 +19,7 @@
 
 
         <item name="error_drawable">@drawable/ic_error_outline_24px_night</item>
+        <item name="settings_drawable">@drawable/ic_settings_24px_night</item>
         <item name="toolbar_color">@color/black</item>
     </style>
     <style name="Theme.StackExchange.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">

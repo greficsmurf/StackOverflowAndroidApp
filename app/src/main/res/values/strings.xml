@@ -4,6 +4,7 @@
     <string name="home_title">Home</string>
     <string name="search_title">Search</string>
     <string name="search_menu_title">Search</string>
+    <string name="settings_title">Settings</string>
 
     <string name="error_indication">Error occurred</string>
     <string name="search_bar_init_error">Search is broken</string>
@@ -15,4 +16,18 @@
 
     <string name="stackoverflow_domain">https://stackoverflow.com</string>
     <string name="cookie_string">se-consent=%7b%22s%22%3a1%2c%22d%22%3a%222020-10-24T06%3a00%3a01.1106004Z%22%7d</string>
+
+
+    <string name="theme_preference_key">theme</string>
+    <string name="theme_preference_title">Theme</string>
+
+
+    <string name="light_theme_name">Light</string>
+    <string name="light_theme_entry_value">theme_01</string>
+    <string name="dark_theme_name">Dark</string>
+    <string name="dark_theme_entry_value">theme_02</string>
+    <string name="system_default_theme_name">System Default</string>
+    <string name="system_default_theme_entry_value">theme_03</string>
+
+
 </resources>

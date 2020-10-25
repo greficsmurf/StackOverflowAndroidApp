@@ -11,7 +11,7 @@ data class Resource<T>(
                 ResourceStatus.LOADING,
                 msg
         )
-        fun <T> loaded(data: T, msg: String = "") = Resource(
+        fun <T> loaded(data: T?, msg: String = "") = Resource(
                 data,
                 ResourceStatus.LOADED,
                 msg

@@ -8,6 +8,7 @@ import com.example.stackexchange.db.dao.UserDao
 import com.example.stackexchange.db.models.JoinSearchQuestionUserDb
 import com.example.stackexchange.db.models.SearchQuestionDb
 import com.example.stackexchange.db.models.UserDb
+import com.example.stackexchange.db.typeconverters.DateConverter
 import com.example.stackexchange.db.typeconverters.StringListConverter
 
 @Database(
@@ -17,7 +18,7 @@ import com.example.stackexchange.db.typeconverters.StringListConverter
         ],
         version = 1
 )
-@TypeConverters(StringListConverter::class)
+@TypeConverters(StringListConverter::class, DateConverter::class)
 abstract class AppDatabase : RoomDatabase(){
 
     abstract fun getSearchQuestionDao(): SearchQuestionDao
