@@ -22,7 +22,7 @@ class SearchRepo @Inject constructor(
 
     fun searchQuestions(title: String,
                         sort: QuestionSort = QuestionSort.Interesting()) = object : NetworkResource<SearchQuestionsApi, SearchQuestions>(){
-        override suspend fun fetch() = stackOverflowService.getQuestions(title, sort.name)
+        override suspend fun fetch() = stackOverflowService.getQuestions(title)
 
         override fun toDomainModel(data: SearchQuestionsApi) = data.toDomainModel()
     }.asFlow()

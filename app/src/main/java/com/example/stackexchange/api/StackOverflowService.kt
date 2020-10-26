@@ -8,7 +8,6 @@ const val API_KEY = "QyiURHLOWXQQnbrscSYRgw(("
 interface StackOverflowService {
     @GET("search/advanced?key=$API_KEY&site=stackoverflow")
     suspend fun getQuestions(@Query("q") q: String,
-                             @Query("sort") sort: String,
                              @Query("page") page: Int = 1,
                              @Query("pagesize") pageSize: Int = 20) : SearchQuestionsApi
 

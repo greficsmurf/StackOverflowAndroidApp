@@ -21,7 +21,7 @@ class PagedSearchQuestionsDataSource(
         val data = if(searchString == null){
             stackOverflowService.getAllQuestions(params.loadSize, questionSort.name, nextPage).questionsApi
         }else{
-            stackOverflowService.getAllQuestions(params.key ?: 1, questionSort.name, nextPage).questionsApi
+            stackOverflowService.getQuestions(searchString,params.key ?: 1).questionsApi
         }.map { it.toDomainModel() }
 
         LoadResult.Page(data, if(nextPage == 1) null else nextPage - 1, nextPage + 1)
