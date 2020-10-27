@@ -1,5 +1,9 @@
 package com.example.stackexchange.ui.home
 
+import android.accounts.Account
+import android.accounts.AccountManager
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.widget.LinearLayout
@@ -10,6 +14,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -19,10 +24,13 @@ import com.example.stackexchange.R
 import com.example.stackexchange.databinding.FragmentHomeBinding
 import com.example.stackexchange.di.Injectable
 import com.example.stackexchange.di.ViewModelFactory
+import com.example.stackexchange.domain.models.User
 import com.example.stackexchange.interfaces.QuestionsAdapterNavCallback
 import com.example.stackexchange.repo.QuestionSort
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -67,6 +75,11 @@ class HomeFragment : Fragment(), Injectable {
             true
         }
 
+        menu.findItem(R.id.account_menu).setOnMenuItemClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToUserFragment2(
+                User.AUTH_USER_ID))
+            true
+        }
     }
 
     class HomeQuestionsPagerAdapter(f: Fragment) : FragmentStateAdapter(f){

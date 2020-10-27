@@ -6,5 +6,11 @@
         android:id="@+id/settings_menu"
         app:showAsAction="always"
         android:icon="?attr/settings_drawable"
-        android:title="@string/search_menu_title" />
+        android:title="@string/settings_title" />
+
+    <item
+        android:id="@+id/account_menu"
+        app:showAsAction="ifRoom"
+        android:icon="?attr/account_drawable"
+        android:title="@string/account_title" />
 </menu>

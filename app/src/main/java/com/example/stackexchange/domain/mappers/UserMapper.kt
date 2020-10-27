@@ -3,6 +3,7 @@ package com.example.stackexchange.domain.mappers
 import com.example.stackexchange.api.models.UserApi
 import com.example.stackexchange.db.models.UserDb
 import com.example.stackexchange.domain.models.User
+import java.util.*
 
 fun UserApi.toDomainModel() = User(
         reputation,
@@ -10,7 +11,8 @@ fun UserApi.toDomainModel() = User(
         userType,
         profileImage,
         displayName,
-        link
+        link,
+        creationDate
 )
 
 fun UserDb.toDomainModel() = User(
@@ -19,7 +21,8 @@ fun UserDb.toDomainModel() = User(
         userType,
         profileImage,
         displayName,
-        link
+        link,
+        Date().apply { time = 0 }
 )
 
 fun User.toDbModel() = UserDb(

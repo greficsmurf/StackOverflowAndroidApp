@@ -1,17 +1,17 @@
 package com.example.stackexchange.binding
 
 import android.graphics.Color
-import android.os.Build
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
 import com.example.stackexchange.R
 import com.example.stackexchange.vo.ResourceStatus
-import com.google.android.material.switchmaterial.SwitchMaterial
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 @BindingAdapter("android:isVisible")
 fun setVisibility(view: View, isVisible: Boolean){
@@ -47,6 +47,18 @@ fun setAnsweredBackground(view: TextView, isAnswered: Boolean){
     }
 }
 
-fun setThemeSwitch(view: SwitchCompat, themeMode: Int?){
-
+@BindingAdapter("android:imageUrl")
+fun setImage(view: ImageView, link: String?){
+    Glide.with(view).load(link).into(view)
 }
+
+@BindingAdapter("android:date")
+fun setPrefixDate(view: TextView, date: Date?){
+    val sdf = SimpleDateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.SHORT, Locale.getDefault())
+    date?.let {cDate ->
+        val time = sdf.format(cDate)
+
+        view.text = view.context.getString(R.string.profile_creation_time, time)
+    }
+}
+

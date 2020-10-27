@@ -10,7 +10,7 @@ class DateAdapter {
     @FromJson
     fun toDate(unixTimeStamp: String) : Date{
         return Date().apply {
-            time = unixTimeStamp.toLong()
+            time = unixTimeStamp.toLong() * 1000
         }
     }
 

@@ -1,6 +1,7 @@
 package com.example.stackexchange.adapters.recycler
 
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
@@ -46,6 +47,8 @@ class QuestionViewHolder(
         private val binding: RecyclerItemQuestionBinding,
         private val navCallback: QuestionsAdapterNavCallback
 ) : RecyclerView.ViewHolder(binding.root){
+    private val USER_INFO_ID = 0
+
     fun bind(question: SearchQuestion){
         binding.apply {
             title = question.title
@@ -56,7 +59,13 @@ class QuestionViewHolder(
 
             layout.setOnClickListener {
                 navCallback.navigate(it.findNavController(), question.link, question.title)
-//                it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToQuestionFragment(question.link))
+            }
+            layout.setOnCreateContextMenuListener { menu, v, menuInfo ->
+                menu.add(Menu.NONE, USER_INFO_ID, Menu.NONE, "User info").setOnMenuItemClickListener {
+                    navCallback.navigateToUser(itemView.findNavController(), question.owner.userId)
+
+                    true
+                }
             }
 
             executePendingBindings()

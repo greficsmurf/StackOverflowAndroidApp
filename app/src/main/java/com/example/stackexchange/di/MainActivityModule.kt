@@ -5,6 +5,7 @@ import com.example.stackexchange.ui.home.HomeFragment
 import com.example.stackexchange.ui.home.HomeQuestionsTab
 import com.example.stackexchange.ui.question.QuestionFragment
 import com.example.stackexchange.ui.search.SearchFragment
+import com.example.stackexchange.ui.user.UserFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -25,4 +26,7 @@ abstract class MainActivityModule {
 
     @ContributesAndroidInjector
     abstract fun contributeQuestionTabFragment(): HomeQuestionsTab
+
+    @ContributesAndroidInjector
+    abstract fun contributeUserFragment(): UserFragment
 }

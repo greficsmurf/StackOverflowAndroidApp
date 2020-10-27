@@ -55,6 +55,10 @@ class HomeQuestionsTab : BaseFragment() {
                     override fun navigate(navController: NavController, url: String, title: String) {
                         navController.navigate(HomeFragmentDirections.actionHomeFragmentToQuestionFragment(url, title))
                     }
+
+                    override fun navigateToUser(navController: NavController, id: Long) {
+                        navController.navigate(HomeFragmentDirections.actionHomeFragmentToUserFragment2(id))
+                    }
                 }
         )
 

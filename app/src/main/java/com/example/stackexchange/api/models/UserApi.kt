@@ -1,6 +1,7 @@
 package com.example.stackexchange.api.models
 
 import com.squareup.moshi.Json
+import java.util.*
 
 
 data class UserApi(
@@ -13,5 +14,7 @@ data class UserApi(
         val profileImage: String = "",
         @Json(name = "display_name")
         val displayName: String = "",
-        val link: String = ""
+        val link: String = "",
+        @Json(name = "creation_date")
+        val creationDate: Date = Date().apply { time = 0 }
 )

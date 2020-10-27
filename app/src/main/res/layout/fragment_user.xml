@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.example.stackexchange.vo.Resource"/>
+        <variable
+            name="viewModel"
+            type="com.example.stackexchange.ui.user.UserViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            layout="@layout/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:resource="@{(Resource) viewModel.userInfoResource}" />
+
+        <ImageView
+            style="@style/DefaultMargins"
+            android:id="@+id/user_profile_image"
+            android:layout_width="@dimen/user_image_width"
+            android:layout_height="@dimen/user_image_height"
+            android:imageUrl="@{viewModel.userInfo.profileImage}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/Theme.StackExchange.Common.ItemTitle"
+            android:id="@+id/user_profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.userInfo.displayName}"
+            app:layout_constraintStart_toEndOf="@id/user_profile_image"
+            app:layout_constraintTop_toTopOf="@id/user_profile_image"
+            android:layout_marginTop="0dp"
+            tools:text="Timur Green"
+            />
+
+        <TextView
+            style="@style/Theme.StackExchange.Common.ItemTitle"
+            android:id="@+id/user_reputation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{"Reputation: " + viewModel.userInfo.reputation}'
+            app:layout_constraintStart_toEndOf="@id/user_profile_image"
+            app:layout_constraintTop_toBottomOf="@id/user_profile_name"
+            tools:text="1000"
+            />
+        <TextView
+            style="@style/Theme.StackExchange.Common.DateText"
+            android:id="@+id/user_creation_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:date='@{viewModel.userInfo.creationDate}'
+            app:layout_constraintStart_toEndOf="@id/user_profile_image"
+            app:layout_constraintTop_toBottomOf="@id/user_reputation"
+            tools:text="1000"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

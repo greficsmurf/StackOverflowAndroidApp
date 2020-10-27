@@ -20,6 +20,8 @@
         <item name="error_drawable">@drawable/ic_error_outline_24px</item>
         <item name="settings_drawable">@drawable/ic_settings_24px</item>
         <item name="toolbar_color">@color/white</item>
+        <item name="account_drawable">@drawable/ic_account_circle_24px</item>
+
     </style>
     <style name="Theme.StackExchange.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="itemBackground">@color/white</item>

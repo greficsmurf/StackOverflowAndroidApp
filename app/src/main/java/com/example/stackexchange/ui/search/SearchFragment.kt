@@ -46,6 +46,10 @@ class SearchFragment : BaseFragment(){
             override fun navigate(navController: NavController, url: String, title: String) {
                 navController.navigate(SearchFragmentDirections.actionSearchFragmentToQuestionFragment(url, title))
             }
+
+            override fun navigateToUser(navController: NavController, id: Long) {
+                navController.navigate(SearchFragmentDirections.actionSearchFragmentToUserFragment(id))
+            }
         })
 
         binding.apply {

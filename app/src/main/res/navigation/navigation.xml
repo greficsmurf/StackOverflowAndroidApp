@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_userFragment2"
+            app:destination="@id/userFragment" />
     </fragment>
     <fragment
         android:id="@+id/questionFragment"
@@ -38,6 +41,9 @@
         <action
             android:id="@+id/action_searchFragment_to_questionFragment"
             app:destination="@id/questionFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_userFragment"
+            app:destination="@id/userFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -45,5 +51,15 @@
         android:label="@string/settings_title"
         tools:layout="@layout/fragment_settings"
     />
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.example.stackexchange.ui.user.UserFragment"
+        android:label="@string/user_info_title"
+        tools:layout="@layout/fragment_user"
+        >
+        <argument
+            android:name="userId"
+            app:argType="long" />
+    </fragment>
 
 </navigation>

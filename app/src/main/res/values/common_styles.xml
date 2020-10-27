@@ -8,6 +8,14 @@
         <item name="android:layout_marginRight">16dp</item>
         <item name="android:textSize">16sp</item>
     </style>
+    <style name="Theme.StackExchange.Common.DefaultText" parent="android:Widget.TextView">
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginBottom">16dp</item>
+
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
     <style name="DefaultMargins">
         <item name="android:layout_marginTop">16dp</item>
         <item name="android:layout_marginBottom">16dp</item>
@@ -15,9 +23,14 @@
         <item name="android:layout_marginLeft">16dp</item>
         <item name="android:layout_marginRight">16dp</item>
     </style>
+    <style name="Theme.StackExchange.Common.DateText" parent="Theme.StackExchange.Common.DefaultText">
+        <item name="android:textSize">12sp</item>
+        <item name="color">@color/dark_gray</item>
+    </style>
 
     <attr name="error_drawable" format="reference"/>
     <attr name="settings_drawable" format="reference"/>
+    <attr name="account_drawable" format="reference"/>
     <attr name="toolbar_color" format="reference"/>
 
 </resources>
