@@ -2,6 +2,7 @@ package com.example.stackexchange.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.stackexchange.ui.authuser.AuthUserViewModel
 import com.example.stackexchange.ui.home.HomeViewModel
 import com.example.stackexchange.ui.question.QuestionViewModel
 import com.example.stackexchange.ui.search.SearchViewModel
@@ -29,6 +30,10 @@ abstract class ViewModelModule{
     @Binds
     @IntoSet
     abstract fun bindUserViewModel(vm: UserViewModel): ViewModel
+
+    @Binds
+    @IntoSet
+    abstract fun bindAuthUserViewModel(vm: AuthUserViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

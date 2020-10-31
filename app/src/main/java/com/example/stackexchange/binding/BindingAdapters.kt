@@ -27,6 +27,7 @@ fun setVisibility(view: View, resourceStatus: ResourceStatus?){
         ResourceStatus.LOADED -> setVisibility(view, false)
         ResourceStatus.FAILED -> setVisibility(view, false)
         ResourceStatus.LOADING -> setVisibility(view, true)
+        ResourceStatus.AUTH_REJECTED -> setVisibility(view, false)
         null -> setVisibility(view, true)
     }
 }
@@ -35,6 +36,14 @@ fun setVisibility(view: View, resourceStatus: ResourceStatus?){
 fun setErrorVisibility(view: View, resourceStatus: ResourceStatus?){
     when(resourceStatus){
         ResourceStatus.FAILED -> setVisibility(view, true)
+        else -> setVisibility(view, false)
+    }
+}
+
+@BindingAdapter("android:isAuthVisible")
+fun setAuthVisible(view: View, resourceStatus: ResourceStatus?){
+    when(resourceStatus){
+        ResourceStatus.AUTH_REJECTED -> setVisibility(view, true)
         else -> setVisibility(view, false)
     }
 }

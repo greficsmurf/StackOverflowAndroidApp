@@ -1,9 +1,7 @@
 package com.example.stackexchange.ui.user
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.map
-import androidx.lifecycle.switchMap
+import androidx.lifecycle.*
+import androidx.paging.cachedIn
 import com.example.stackexchange.domain.models.User
 import com.example.stackexchange.repo.UserRepo
 import timber.log.Timber
@@ -14,25 +12,24 @@ class UserViewModel @Inject constructor(
 ) : ViewModel(){
 
     private val _userId = MutableLiveData<Long>()
-    private var _token = ""
     val reputation = MutableLiveData<String>().apply { value = "" }
 
 
     val userInfoResource = _userId.switchMap {
-        if(it == User.AUTH_USER_ID)
-            userRepo.getAuthUserResource(_token).asLiveData()
-        else
-            userRepo.getUserResource(it).asLiveData()
+        userRepo.getUserResource(it).asLiveData()
     }
+
     val userInfo = userInfoResource.map {
         it.data
     }
 
+    // to be changed, temp solution
+    val userQuestionsDataSource = _userId.switchMap {
+        userRepo.getUserQuestionsDataSource(it, 20).cachedIn(viewModelScope)
+    }
 
     fun setUserId(id: Long){
         _userId.value = id
     }
-    fun setToken(token: String){
-        _token = token
-    }
+
 }

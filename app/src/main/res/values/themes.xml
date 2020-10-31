@@ -21,6 +21,19 @@
         <item name="settings_drawable">@drawable/ic_settings_24px</item>
         <item name="toolbar_color">@color/white</item>
         <item name="account_drawable">@drawable/ic_account_circle_24px</item>
+        <item name="sign_out_icon">@drawable/ic_exit_to_app_24px</item>
+
+
+        <!-- these should be the correct ones -->
+        app:enterAnim="@android:anim/slide_in_left"
+        app:exitAnim="@android:anim/slide_out_right"
+        app:popEnterAnim="@android:anim/slide_in_left"
+        app:popExitAnim="@android:anim/slide_out_right"
+
+<!--        <item name="android:fragmentOpenEnterAnimation">@android:anim/slide_in_left</item>-->
+<!--        <item name="android:fragmentCloseExitAnimation">@android:anim/slide_out_right</item>-->
+<!--        <item name="android:popupEnterTransition">@android:anim/slide_in_left</item>-->
+<!--        <item name="android:windowEnterAnimation">@android:anim/slide_out_right</item>-->
 
     </style>
     <style name="Theme.StackExchange.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
@@ -36,4 +49,6 @@
         <item name="tabIndicatorColor">@color/green_light</item>
         <item name="tabTextColor">@color/green_light</item>
     </style>
+
+
 </resources>

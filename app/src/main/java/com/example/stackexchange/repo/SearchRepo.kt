@@ -29,7 +29,7 @@ class SearchRepo @Inject constructor(
 
     fun getSearchedQuestionsDataSource(
         title: String, pageSize: Int, sort: QuestionSort = QuestionSort.Interesting()
-    ) : LiveData<PagingData<SearchQuestion>> = Pager(PagingConfig(pageSize = pageSize)){
+    ) : LiveData<PagingData<SearchQuestion>> = Pager(PagingConfig(initialLoadSize = 20, pageSize = pageSize)){
         PagedSearchQuestionsDataSource(
             stackOverflowService,
             sort,

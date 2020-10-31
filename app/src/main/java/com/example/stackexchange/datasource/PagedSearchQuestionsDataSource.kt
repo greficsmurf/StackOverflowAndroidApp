@@ -26,7 +26,7 @@ class PagedSearchQuestionsDataSource(
 
         LoadResult.Page(data, if(nextPage == 1) null else nextPage - 1, nextPage + 1)
     }catch (e: Exception){
-        Timber.d(e.message)
+        e.printStackTrace()
         LoadResult.Error(e)
     }
 

@@ -7,12 +7,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.example.stackexchange.StackExchangeApp
+import com.example.stackexchange.base.BaseApplication
 import dagger.android.AndroidInjection
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.HasSupportFragmentInjector
 
 object AppInjector{
-    fun init(app: StackExchangeApp){
+    fun init(app: BaseApplication){
         DaggerAppComponent
                 .builder()
                 .application(app)

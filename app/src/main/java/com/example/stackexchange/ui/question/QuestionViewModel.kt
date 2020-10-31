@@ -20,7 +20,7 @@ class QuestionViewModel @Inject constructor() : ViewModel(){
     }
 
     fun setError(msg: String = ""){
-        _pageResource.value = Resource.failed(null, msg)
+        _pageResource.value = Resource.failed(null, null, msg)
     }
 
 }

@@ -28,9 +28,15 @@
         <item name="color">@color/dark_gray</item>
     </style>
 
+
     <attr name="error_drawable" format="reference"/>
     <attr name="settings_drawable" format="reference"/>
     <attr name="account_drawable" format="reference"/>
     <attr name="toolbar_color" format="reference"/>
+    <attr name="sign_out_icon" format="reference"/>
 
+    <item name="m_nav_enter_anim" type="anim">@android:anim/slide_in_left</item>
+    <item name="m_nav_exit_anim" type="anim">@android:anim/slide_out_right</item>
+    <item name="m_nav_pop_enter_anim" type="anim">@anim/m_slide_in_right</item>
+    <item name="m_nav_pop_exit_anim" type="anim">@anim/m_slide_out_left</item>
 </resources>

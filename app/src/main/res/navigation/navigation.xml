@@ -12,13 +12,37 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_questionFragment"
-            app:destination="@id/questionFragment" />
+            app:destination="@id/questionFragment"
+
+            app:enterAnim="@anim/m_nav_enter_anim"
+            app:exitAnim="@anim/m_nav_exit_anim"
+            app:popEnterAnim="@anim/m_nav_pop_enter_anim"
+            app:popExitAnim="@anim/m_nav_pop_exit_anim"
+            />
         <action
             android:id="@+id/action_homeFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            app:destination="@id/settingsFragment"
+
+            app:enterAnim="@anim/m_nav_enter_anim"
+            app:exitAnim="@anim/m_nav_exit_anim"
+            app:popEnterAnim="@anim/m_nav_pop_enter_anim"
+            app:popExitAnim="@anim/m_nav_pop_exit_anim" />
         <action
             android:id="@+id/action_homeFragment_to_userFragment2"
-            app:destination="@id/userFragment" />
+            app:destination="@id/userFragment"
+
+            app:enterAnim="@anim/m_nav_enter_anim"
+            app:exitAnim="@anim/m_nav_exit_anim"
+            app:popEnterAnim="@anim/m_nav_pop_enter_anim"
+            app:popExitAnim="@anim/m_nav_pop_exit_anim"/>
+        <action
+            android:id="@+id/action_homeFragment_to_authUserFragment"
+            app:destination="@id/authUserFragment"
+
+            app:enterAnim="@anim/m_nav_enter_anim"
+            app:exitAnim="@anim/m_nav_exit_anim"
+            app:popEnterAnim="@anim/m_nav_pop_enter_anim"
+            app:popExitAnim="@anim/m_nav_pop_exit_anim"/>
     </fragment>
     <fragment
         android:id="@+id/questionFragment"
@@ -40,10 +64,20 @@
         tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_questionFragment"
-            app:destination="@id/questionFragment" />
+            app:destination="@id/questionFragment"
+
+            app:enterAnim="@anim/m_nav_enter_anim"
+            app:exitAnim="@anim/m_nav_exit_anim"
+            app:popEnterAnim="@anim/m_nav_pop_enter_anim"
+            app:popExitAnim="@anim/m_nav_pop_exit_anim"/>
         <action
             android:id="@+id/action_searchFragment_to_userFragment"
-            app:destination="@id/userFragment" />
+            app:destination="@id/userFragment"
+
+            app:enterAnim="@anim/m_nav_enter_anim"
+            app:exitAnim="@anim/m_nav_exit_anim"
+            app:popEnterAnim="@anim/m_nav_pop_enter_anim"
+            app:popExitAnim="@anim/m_nav_pop_exit_anim"/>
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -60,6 +94,27 @@
         <argument
             android:name="userId"
             app:argType="long" />
+        <action
+            android:id="@+id/action_userFragment_self"
+            app:destination="@id/userFragment"
+
+            app:enterAnim="@anim/m_nav_enter_anim"
+            app:exitAnim="@anim/m_nav_exit_anim"
+            app:popEnterAnim="@anim/m_nav_pop_enter_anim"
+            app:popExitAnim="@anim/m_nav_pop_exit_anim"/>
+        <action
+            android:id="@+id/action_userFragment_to_questionFragment"
+            app:destination="@id/questionFragment"
+
+            app:enterAnim="@anim/m_nav_enter_anim"
+            app:exitAnim="@anim/m_nav_exit_anim"
+            app:popEnterAnim="@anim/m_nav_pop_enter_anim"
+            app:popExitAnim="@anim/m_nav_pop_exit_anim"/>
     </fragment>
+    <fragment
+        android:id="@+id/authUserFragment"
+        android:name="com.example.stackexchange.ui.authuser.AuthUserFragment"
+        android:label="@string/auth_user_title"
+        tools:layout="@layout/fragment_auth_user"/>
 
 </navigation>

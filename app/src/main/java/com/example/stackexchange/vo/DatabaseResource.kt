@@ -14,7 +14,7 @@ abstract class DatabaseResource<DbT, DomainT>{
                 emit(Resource.loaded(toDomainModel(dbRes)))
             }
         }catch (e: Exception){
-            emit(Resource.failed(null, e.message ?: ""))
+            emit(Resource.failed(null))
         }
     }
 

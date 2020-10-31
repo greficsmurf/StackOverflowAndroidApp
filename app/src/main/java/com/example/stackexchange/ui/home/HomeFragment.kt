@@ -51,7 +51,6 @@ class HomeFragment : Fragment(), Injectable {
                 false
         )
 
-
         return binding.root
     }
 
@@ -76,8 +75,7 @@ class HomeFragment : Fragment(), Injectable {
         }
 
         menu.findItem(R.id.account_menu).setOnMenuItemClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToUserFragment2(
-                User.AUTH_USER_ID))
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAuthUserFragment())
             true
         }
     }

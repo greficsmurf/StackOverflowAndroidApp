@@ -2,6 +2,7 @@ package com.example.stackexchange.vo
 
 import androidx.lifecycle.asLiveData
 import kotlinx.coroutines.flow.flow
+import retrofit2.HttpException
 import timber.log.Timber
 import java.lang.Exception
 
@@ -11,8 +12,8 @@ abstract class NetworkResource<ApiT, DomainT> {
         try{
             emit(Resource.loaded(toDomainModel(fetch())))
         }catch (e: Exception){
-            Timber.d(e.message)
-            emit(Resource.failed(null, e.message ?: ""))
+            e.printStackTrace()
+            emit(onError(e))
         }
     }
 
@@ -21,4 +22,6 @@ abstract class NetworkResource<ApiT, DomainT> {
 
     abstract suspend fun fetch(): ApiT
     abstract fun toDomainModel(data: ApiT): DomainT
+
+    open fun onError(e: Exception): Resource<DomainT> = Resource.failed(null)
 }

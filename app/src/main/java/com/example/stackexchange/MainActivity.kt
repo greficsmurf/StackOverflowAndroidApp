@@ -52,6 +52,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                         account = am.getAccountsByType(getString(R.string.stackoverflow_account_type)).firstOrNull()
                     }
                     am.setAuthToken(account, getString(R.string.stackoverflow_auth_token_type), token)
+                    Snackbar.make(findViewById(android.R.id.content), getString(R.string.logged_in_message), Snackbar.LENGTH_SHORT).show()
                 }
             }
         }

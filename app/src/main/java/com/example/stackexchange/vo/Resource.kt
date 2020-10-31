@@ -1,25 +1,37 @@
 package com.example.stackexchange.vo
 
+import com.example.stackexchange.interfaces.ResourceCallback
+
 data class Resource<T>(
         val data: T?,
         val status: ResourceStatus,
-        val msg: String
+        val msg: String,
+        val callback: ResourceCallback?
 ){
     companion object{
-        fun <T> loading(data: T?, msg: String = "") = Resource(
+        fun <T> loading(data: T?, callback: ResourceCallback? = null, msg: String = "") = Resource(
                 data,
                 ResourceStatus.LOADING,
-                msg
+                msg,
+                callback
         )
-        fun <T> loaded(data: T?, msg: String = "") = Resource(
+        fun <T> loaded(data: T?, callback: ResourceCallback? = null, msg: String = "") = Resource(
                 data,
                 ResourceStatus.LOADED,
-                msg
+                msg,
+                callback
         )
-        fun <T> failed(data: T?, msg: String = "") = Resource(
+        fun <T> failed(data: T?, callback: ResourceCallback? = null, msg: String = "") = Resource(
                 data,
                 ResourceStatus.FAILED,
-                msg
+                msg,
+                callback
+        )
+        fun <T> authFailed(data: T?, callback: ResourceCallback? = null, msg: String = "") = Resource(
+                data,
+                ResourceStatus.AUTH_REJECTED,
+                msg,
+                callback
         )
     }
 }

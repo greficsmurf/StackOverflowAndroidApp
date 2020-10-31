@@ -27,7 +27,7 @@ abstract class NetworkDatabaseResource<ApiT, DbT, DomainT> {
                     }
                 }
             }catch (e: Exception){
-                emit(Resource.failed(null, e.message ?: ""))
+                emit(Resource.failed(null))
                 cancel()
             }
         }

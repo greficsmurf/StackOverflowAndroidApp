@@ -1,5 +1,8 @@
 package com.example.stackexchange.utils
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
@@ -24,4 +27,13 @@ fun getResourceByLoadStates(loadStates: CombinedLoadStates): Resource<Nothing>{
 
 
     return Resource.loaded(null)
+}
+
+fun hasNetwork(context: Context): Boolean? {
+    var isConnected: Boolean? = false // Initial Value
+    val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val activeNetwork: NetworkInfo? = connectivityManager.activeNetworkInfo
+    if (activeNetwork != null && activeNetwork.isConnected)
+        isConnected = true
+    return isConnected
 }

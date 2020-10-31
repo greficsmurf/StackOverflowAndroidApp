@@ -7,65 +7,63 @@ import android.accounts.AccountManager
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat.startActivity
 import com.example.stackexchange.R
+import com.example.stackexchange.base.BaseApplication
 import timber.log.Timber
+import java.lang.Exception
 import java.lang.UnsupportedOperationException
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class Authenticator(val context: Context
-): AbstractAccountAuthenticator(context){
+@Singleton
+class StackOverflowAuthenticator @Inject constructor(val application: BaseApplication){
+    private val mAccountManager = AccountManager.get(application.applicationContext)
 
-    private val accountManager = AccountManager.get(context)
+    private val mAccType = application.getString(R.string.stackoverflow_account_type)
+    private val mAuthType = application.getString(R.string.stackoverflow_auth_token_type)
+    private val mAccName = application.getString(R.string.stackoverflow_account_name)
+    private val mAuthUrl = application.getString(R.string.auth_url)
 
-    override fun getAuthTokenLabel(authTokenType: String?): String {
-        throw UnsupportedOperationException()
-    }
-
-    override fun confirmCredentials(response: AccountAuthenticatorResponse?, account: Account?, options: Bundle?): Bundle {
-        throw UnsupportedOperationException()
-    }
-
-    override fun updateCredentials(response: AccountAuthenticatorResponse?, account: Account?, authTokenType: String?, options: Bundle?): Bundle {
-        throw UnsupportedOperationException()
-    }
-
-    override fun getAuthToken(response: AccountAuthenticatorResponse?, account: Account?, authTokenType: String?, options: Bundle?): Bundle {
-        throw UnsupportedOperationException()
-//        accountManager.peekAuthToken(account, authTokenType)?.let {
-//            return Bundle().apply {
-//                putString(AccountManager.KEY_AUTHTOKEN, it)
-//            }
-//        }
-//
-////        val intent = Intent(Intent.ACTION_VIEW).apply {
-////            data = Uri.parse(context.getString(R.string.auth_url))
-////        }
-//
-//        val intent = Intent(context, AuthenticatorActivity::class.java)
-//        intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
-//
-//        val bundle = Bundle()
-//        bundle.putParcelable(AccountManager.KEY_INTENT, intent)
-//        return bundle
-    }
-
-    override fun hasFeatures(response: AccountAuthenticatorResponse?, account: Account?, features: Array<out String>?): Bundle {
-        throw UnsupportedOperationException()
-    }
-
-    override fun editProperties(response: AccountAuthenticatorResponse?, accountType: String?): Bundle {
-        throw UnsupportedOperationException()
-    }
-
-    override fun addAccount(response: AccountAuthenticatorResponse?, accountType: String?, authTokenType: String?, requiredFeatures: Array<out String>?, options: Bundle?): Bundle {
-        throw UnsupportedOperationException()
-    }
-
-    private fun addAppAccount(accName: String, accType: String) = accountManager.addAccountExplicitly(
-            Account(accName, accType),
-            null,
+    /**
+     * Gets cached stackoverflow auth token, null if doesn't exist
+     * null if stackoverflow account doesn't exist
+     */
+    fun getAuthToken(): String?{
+        return try{
+            mAccountManager.peekAuthToken(
+                    mAccountManager.getAccountsByType(mAccType).firstOrNull(), mAuthType
+            )
+        }catch (e: Exception) {
             null
-    )
+        }
+    }
 
-    private fun getAppAccount() = accountManager.getAccountsByType(context.getString(R.string.stackoverflow_account_type)).firstOrNull()
+    /**
+     * Starts browser to get stackoverflow token
+     */
+    fun logIn(){
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            data = Uri.parse(mAuthUrl)
+        }
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(application, intent, null)
+    }
+
+
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP_MR1)
+    fun logOff(){
+        mAccountManager.getAccountsByType(mAccType).firstOrNull()?.let {
+            mAccountManager.removeAccountExplicitly(it)
+        }
+    }
+
+    /**
+     * Creates stackoverflow account
+     */
+    fun createAccount() = mAccountManager.addAccountExplicitly(Account(mAccName, mAccType),null,null)
+
 }

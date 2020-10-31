@@ -7,7 +7,7 @@
         <import type="com.example.stackexchange.vo.Resource"/>
         <variable
             name="viewModel"
-            type="com.example.stackexchange.ui.user.UserViewModel" />
+            type="com.example.stackexchange.ui.authuser.AuthUserViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -48,6 +48,7 @@
             android:id="@+id/user_reputation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:isVisible="@{viewModel.userInfo.reputation != 0}"
             android:text='@{"Reputation: " + viewModel.userInfo.reputation}'
             app:layout_constraintStart_toEndOf="@id/user_profile_image"
             app:layout_constraintTop_toBottomOf="@id/user_profile_name"
@@ -64,15 +65,15 @@
             tools:text="1000"
             />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/user_questions"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/user_profile_image" />
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/user_questions"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/user_profile_image" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

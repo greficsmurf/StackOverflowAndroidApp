@@ -22,6 +22,11 @@ interface StackOverflowService {
     @GET("users/{id}?key=$API_KEY&site=stackoverflow")
     suspend fun getUser(@Path("id") id: Long) : UsersApi
 
+    @GET("users/{id}/questions?key=$API_KEY&site=stackoverflow")
+    suspend fun getUserQuestions(@Path("id") id: Long,
+                                 @Query("pagesize") pageSize: Int,
+                                 @Query("page") page: Int) : SearchQuestionsApi
+
     @GET("me?key=$API_KEY&site=stackoverflow")
-    suspend fun getAuthUser(@Query("access_token") token: String): UsersApi
+    suspend fun getAuthUser(): UsersApi
 }

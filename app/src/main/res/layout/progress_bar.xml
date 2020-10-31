@@ -32,6 +32,16 @@
                 layout="@layout/error_layout"
                 />
         </FrameLayout>
+        <FrameLayout
+            android:isAuthVisible="@{resource.status}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <include
+                app:callback="@{resource.callback}"
+                layout="@layout/auth_layout"
+                />
+        </FrameLayout>
 
     </merge>
 </layout>

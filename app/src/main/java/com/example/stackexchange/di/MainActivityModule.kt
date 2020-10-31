@@ -1,6 +1,7 @@
 package com.example.stackexchange.di
 
 import com.example.stackexchange.MainActivity
+import com.example.stackexchange.ui.authuser.AuthUserFragment
 import com.example.stackexchange.ui.home.HomeFragment
 import com.example.stackexchange.ui.home.HomeQuestionsTab
 import com.example.stackexchange.ui.question.QuestionFragment
@@ -26,6 +27,9 @@ abstract class MainActivityModule {
 
     @ContributesAndroidInjector
     abstract fun contributeQuestionTabFragment(): HomeQuestionsTab
+
+    @ContributesAndroidInjector
+    abstract fun contributeAuthUserFragment(): AuthUserFragment
 
     @ContributesAndroidInjector
     abstract fun contributeUserFragment(): UserFragment
