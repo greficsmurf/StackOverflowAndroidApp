@@ -1,11 +1,12 @@
 package com.example.stackexchange.domain.mappers
 
 import com.example.stackexchange.api.models.SearchQuestionApi
+import com.example.stackexchange.db.models.BaseSearchQuestionDb
+import com.example.stackexchange.db.models.IBaseSearchQuestionDb
 import com.example.stackexchange.db.models.JoinSearchQuestionUserDb
 import com.example.stackexchange.db.models.SearchQuestionDb
 import com.example.stackexchange.domain.models.SearchQuestion
 import com.example.stackexchange.domain.models.User
-import java.util.*
 
 fun SearchQuestionApi.toDomainModel() = SearchQuestion(
         tags,
@@ -21,7 +22,7 @@ fun SearchQuestionApi.toDomainModel() = SearchQuestion(
         lastActivityDate
 )
 
-fun SearchQuestionDb.toDomainModel(owner: User) = SearchQuestion(
+fun BaseSearchQuestionDb.toDomainModel(owner: User) = SearchQuestion(
         tags,
         owner,
         isAnswered,
@@ -29,13 +30,14 @@ fun SearchQuestionDb.toDomainModel(owner: User) = SearchQuestion(
         answerCount,
         score,
         searchQuestionId,
-        link,
+        questionLink,
         title,
         creationDate,
         lastActivityDate
 )
 
-fun SearchQuestion.toDbModel(sortId: Int = 0) = SearchQuestionDb(
+
+fun SearchQuestion.toDbModel(sortId: Int = 0): SearchQuestionDb = SearchQuestionDb(
         questionId,
         tags,
         owner.userId,
@@ -50,6 +52,7 @@ fun SearchQuestion.toDbModel(sortId: Int = 0) = SearchQuestionDb(
         lastActivityDate
 )
 
+
 fun JoinSearchQuestionUserDb.toDomainModel() = SearchQuestion(
         searchQuestion.tags,
         user.toDomainModel(),
@@ -58,7 +61,7 @@ fun JoinSearchQuestionUserDb.toDomainModel() = SearchQuestion(
         searchQuestion.answerCount,
         searchQuestion.score,
         searchQuestion.searchQuestionId,
-        searchQuestion.link,
+        searchQuestion.questionLink,
         searchQuestion.title,
         searchQuestion.creationDate,
         searchQuestion.lastActivityDate

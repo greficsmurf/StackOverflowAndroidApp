@@ -13,13 +13,14 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel(){
     private val _questionSort = MutableLiveData<QuestionSort>()
 
+    init {
+        Timber.d("CREATED ${_questionSort.value?.name}")
+    }
     val questionsDataSource = _questionSort.switchMap {
-        homeRepo.getHomeQuestionsDataSource(20, it).cachedIn(viewModelScope)
+        homeRepo.getHomeQuestionsPagingSource(20, it).cachedIn(viewModelScope)
     }
 
-//    val questions = questionsResource.map {
-//        it.data
-//    }
+
 
     fun refresh(){
         _questionSort.forceRefresh()

@@ -3,18 +3,18 @@ package com.example.stackexchange.db
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.stackexchange.db.dao.SearchQuestionDao
-import com.example.stackexchange.db.dao.UserDao
-import com.example.stackexchange.db.models.JoinSearchQuestionUserDb
-import com.example.stackexchange.db.models.SearchQuestionDb
-import com.example.stackexchange.db.models.UserDb
+import com.example.stackexchange.db.dao.*
+import com.example.stackexchange.db.models.*
 import com.example.stackexchange.db.typeconverters.DateConverter
 import com.example.stackexchange.db.typeconverters.StringListConverter
 
 @Database(
         entities = [
             UserDb::class,
-            SearchQuestionDb::class
+            SearchQuestionDb::class,
+            HotSearchQuestionDb::class,
+            WeekSearchQuestionDb::class,
+            MonthSearchQuestionDb::class
         ],
         version = 1
 )
@@ -23,5 +23,9 @@ abstract class AppDatabase : RoomDatabase(){
 
     abstract fun getSearchQuestionDao(): SearchQuestionDao
     abstract fun getUserDao(): UserDao
+
+    abstract fun getHotQuestionDao(): HotQuestionDao
+    abstract fun getWeekQuestionDao(): WeekQuestionDao
+    abstract fun getMonthQuestionDao(): MonthQuestionDao
 
 }

@@ -21,7 +21,6 @@ class QuestionsPagedAdapter(
     companion object{
         val diffUtil = object : DiffUtil.ItemCallback<SearchQuestion>(){
             override fun areItemsTheSame(oldItem: SearchQuestion, newItem: SearchQuestion) = oldItem.questionId == newItem.questionId
-
             override fun areContentsTheSame(oldItem: SearchQuestion, newItem: SearchQuestion) = newItem == oldItem
         }
     }
@@ -60,6 +59,7 @@ class QuestionViewHolder(
             layout.setOnClickListener {
                 navCallback.navigate(it.findNavController(), question.link, question.title)
             }
+
             layout.setOnCreateContextMenuListener { menu, v, menuInfo ->
                 menu.add(Menu.NONE, USER_INFO_ID, Menu.NONE, "User info").setOnMenuItemClickListener {
                     navCallback.navigateToUser(itemView.findNavController(), question.owner.userId)

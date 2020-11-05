@@ -9,14 +9,19 @@ import com.example.stackexchange.base.BaseApplication
 import com.example.stackexchange.datasource.PagedSearchQuestionsDataSource
 import com.example.stackexchange.datasource.UserQuestionsDataSource
 import com.example.stackexchange.db.dao.UserDao
+import com.example.stackexchange.db.models.UserDb
+import com.example.stackexchange.domain.mappers.toDbModel
 import com.example.stackexchange.domain.mappers.toDomainModel
 import com.example.stackexchange.domain.models.SearchQuestion
 import com.example.stackexchange.domain.models.User
 import com.example.stackexchange.interfaces.ResourceCallback
+import com.example.stackexchange.vo.NetworkDatabaseResource
 import com.example.stackexchange.vo.NetworkResource
 import com.example.stackexchange.vo.Resource
+import kotlinx.coroutines.flow.Flow
 import retrofit2.HttpException
 import java.lang.Exception
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -26,10 +31,19 @@ class UserRepo @Inject constructor(
         private val userDao: UserDao,
         private val application: BaseApplication
 ){
-    fun getUserResource(id: Long) = object : NetworkResource<UsersApi, User>(){
-        override suspend fun fetch(): UsersApi = stackOverflowService.getUser(id)
+    private val REFRESH_INTERVAL = 60 * 60 * 1000L
+    fun getUserResource(id: Long) = object : NetworkDatabaseResource<UsersApi, UserDb, User>(){
+        override suspend fun fetchApi(): UsersApi = stackOverflowService.getUser(id)
 
-        override fun toDomainModel(data: UsersApi): User = data.users.map { it.toDomainModel() }.first()
+        override fun toDomainModelApi(data: UsersApi): User = data.users.map { it.toDomainModel() }.first()
+        override suspend fun fetchDb(): Flow<UserDb> = userDao.getById(id)
+        override fun toDomainModelDb(data: UserDb): User = data.toDomainModel()
+
+        override fun shouldFetchApi(data: UserDb?): Boolean = data?.let {
+            (System.currentTimeMillis() - (it.updatedAt?.time ?: 0)) > REFRESH_INTERVAL
+        } ?: true
+
+        override suspend fun onDbSave(data: User) = userDao.insertWithTimestamp(data.toDbModel())
     }
 
     fun getAuthUserResource() = object : NetworkResource<UsersApi, User>(){

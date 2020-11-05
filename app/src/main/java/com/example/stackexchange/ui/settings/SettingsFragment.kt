@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
+import androidx.transition.TransitionManager
 import com.example.stackexchange.R
 import com.example.stackexchange.base.BaseFragment
 import com.example.stackexchange.databinding.FragmentSettingsBinding
@@ -36,8 +37,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 true
             }
         }
-
         screen.addPreference(themeListPreference)
+
         preferenceScreen = screen
     }
 

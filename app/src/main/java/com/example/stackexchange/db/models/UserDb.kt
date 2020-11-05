@@ -7,7 +7,6 @@ import com.squareup.moshi.Json
 
 @Entity(tableName = "user")
 data class UserDb(
-        @PrimaryKey
         @ColumnInfo(name = "user_id")
         val userId: Long,
         val reputation: Int = 0,
@@ -19,4 +18,4 @@ data class UserDb(
         val displayName: String,
         @ColumnInfo(name = "user_link")
         val link: String
-)
+) : BaseDbModel()

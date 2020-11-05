@@ -7,7 +7,6 @@ import com.example.stackexchange.api.StackOverflowService
 import com.example.stackexchange.api.adapters.DateAdapter
 import com.example.stackexchange.base.BaseApplication
 import com.example.stackexchange.db.AppDatabase
-import com.example.stackexchange.utils.hasNetwork
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -38,14 +37,6 @@ class AppModule{
 
         val okHttpClient = OkHttpClient.Builder()
                 .cache(myCache)
-                .addInterceptor { chain ->
-                    var request = chain.request()
-                    request = if (hasNetwork(app)!!)
-                        request.newBuilder().header("Cache-Control", "public, max-age=" + 60 * 60 * 2).build()
-                    else
-                        request.newBuilder().header("Cache-Control", "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7).build()
-                    chain.proceed(request)
-                }
                 .addInterceptor {  chain ->
                     val token = app.stackOverflowAuthenticator.getAuthToken()
                     if(token != null){
@@ -83,4 +74,14 @@ class AppModule{
     @Singleton
     @Provides
     fun provideSearchQuestionDao(db: AppDatabase) = db.getSearchQuestionDao()
+
+    @Singleton
+    @Provides
+    fun provideHotQuestionDao(db: AppDatabase) = db.getHotQuestionDao()
+    @Singleton
+    @Provides
+    fun provideWeekQuestionDao(db: AppDatabase) = db.getWeekQuestionDao()
+    @Singleton
+    @Provides
+    fun provideMonthQuestionDao(db: AppDatabase) = db.getMonthQuestionDao()
 }

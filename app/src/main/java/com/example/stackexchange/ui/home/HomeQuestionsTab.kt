@@ -9,17 +9,21 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
+import androidx.paging.map
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.stackexchange.R
 import com.example.stackexchange.adapters.recycler.QuestionsPagedAdapter
 import com.example.stackexchange.base.BaseFragment
 import com.example.stackexchange.databinding.TabQuestionsBinding
+import com.example.stackexchange.domain.mappers.toDomainModel
+import com.example.stackexchange.domain.models.User
 import com.example.stackexchange.interfaces.QuestionsAdapterNavCallback
 import com.example.stackexchange.repo.QuestionSort
 import com.example.stackexchange.utils.getResourceByLoadStates
 import kotlinx.android.synthetic.main.tab_questions.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 class HomeQuestionsTab : BaseFragment() {
@@ -73,10 +77,9 @@ class HomeQuestionsTab : BaseFragment() {
             }
             lifecycleOwner = viewLifecycleOwner
         }
-
         vm.questionsDataSource.observe(viewLifecycleOwner, Observer { pageData ->
             viewLifecycleOwner.lifecycleScope.launch {
-                questionsAdapter.submitData(pageData)
+                questionsAdapter.submitData(pageData.map { it.toDomainModel(User(userId = it.ownerId)) })
                 refresher.isRefreshing = false
             }
         })

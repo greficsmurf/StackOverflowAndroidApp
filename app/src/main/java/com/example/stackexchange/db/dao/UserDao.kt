@@ -5,14 +5,16 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.stackexchange.db.models.UserDb
+import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface UserDao {
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(list: List<UserDb>)
+abstract class UserDao : BaseDao<UserDb>() {
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    abstract suspend fun insert(list: List<UserDb>)
 
     @Query("SELECT * FROM user WHERE user_id=:userId")
-    suspend fun getById(userId: Long): UserDb
+    abstract fun getById(userId: Long): Flow<UserDb>
 
+    @Query("SELECT * FROM user")
+    abstract suspend fun get(): List<UserDb>
 }

@@ -9,7 +9,7 @@ import retrofit2.http.Query
 
 const val API_KEY = "QyiURHLOWXQQnbrscSYRgw(("
 interface StackOverflowService {
-    @GET("search/advanced?key=$API_KEY&site=stackoverflow")
+    @GET("search/advanced?key=$API_KEY&site=stackoverflow&sort=relevance")
     suspend fun getQuestions(@Query("q") q: String,
                              @Query("page") page: Int = 1,
                              @Query("pagesize") pageSize: Int = 20) : SearchQuestionsApi

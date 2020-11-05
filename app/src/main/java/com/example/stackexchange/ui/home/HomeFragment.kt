@@ -43,7 +43,9 @@ class HomeFragment : Fragment(), Injectable {
         vmFactory
     }
     private lateinit var binding: FragmentHomeBinding
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
         binding = DataBindingUtil.inflate(
                 inflater,
                 R.layout.fragment_home,
@@ -55,7 +57,6 @@ class HomeFragment : Fragment(), Injectable {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setHasOptionsMenu(true)
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {

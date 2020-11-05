@@ -3,14 +3,10 @@ package com.example.stackexchange.db.models
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
-import com.example.stackexchange.api.models.UserApi
-import com.example.stackexchange.utils.toDate
-import com.squareup.moshi.Json
 import java.util.*
 
-@Entity(tableName = "search_question")
-open class SearchQuestionDb(
+@Entity(tableName = "month_search_question")
+data class MonthSearchQuestionDb(
         @ColumnInfo(name = "search_question_id")
         override val searchQuestionId: Long,
         override val tags: List<String>,

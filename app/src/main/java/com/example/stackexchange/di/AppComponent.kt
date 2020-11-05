@@ -3,6 +3,7 @@ package com.example.stackexchange.di
 import android.app.Application
 import com.example.stackexchange.StackExchangeApp
 import com.example.stackexchange.base.BaseApplication
+import com.example.stackexchange.datasource.PagedSearchQuestionsDataSource
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -26,4 +27,6 @@ interface AppComponent{
     }
 
     fun inject(app: BaseApplication)
+
+    fun inject(cl: PagedSearchQuestionsDataSource)
 }
