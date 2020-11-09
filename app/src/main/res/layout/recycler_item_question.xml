@@ -28,28 +28,39 @@
         android:background="?attr/selectableItemBackground">
 
         <TextView
-            style="@style/Theme.StackExchange.Common.ItemTitle"
             android:id="@+id/question_title"
+            style="@style/Theme.StackExchange.Common.ItemTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{title}"
-            tools:text="Boolean value isChecked not changing with foreach"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Boolean value isChecked not changing with foreach" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/tags_view_group"
+            style="@style/MediumMargins"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/question_title" />
 
         <include
+            android:id="@+id/include2"
             style="@style/Theme.StackExchange.Common.ItemTitle"
             layout="@layout/count_squares"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             app:answerCount="@{answerCount}"
+            app:isAnswered="@{isAnswered}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/question_title"
+            app:layout_constraintTop_toBottomOf="@+id/tags_view_group"
             app:viewCount="@{viewCount}"
             app:voteCount="@{voteCount}"
-            app:isAnswered="@{isAnswered}"
             tools:layout_editor_absoluteX="16dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

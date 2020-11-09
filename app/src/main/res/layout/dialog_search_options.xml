@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <LinearLayout
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            style="@style/Theme.StackExchange.Common.DialogTitle"
+            android:text="@string/search_options_dialog_title"
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <include
+            layout="@layout/divider_horizontal"/>
+
+        <TextView
+            style="@style/Theme.StackExchange.Common.ItemTitle"
+            android:text="@string/tag_options_title"
+            android:id="@+id/tag_options_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_tags"
+            style="@style/DefaultMargins"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            style="@style/DefaultMargins"
+            android:text="@string/search_btn_text"
+            android:id="@+id/search_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+</layout>

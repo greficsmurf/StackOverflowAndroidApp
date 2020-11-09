@@ -6,6 +6,8 @@ import com.example.stackexchange.ui.home.HomeFragment
 import com.example.stackexchange.ui.home.HomeQuestionsTab
 import com.example.stackexchange.ui.question.QuestionFragment
 import com.example.stackexchange.ui.search.SearchFragment
+import com.example.stackexchange.ui.search.SearchOptionsBottomDialog
+import com.example.stackexchange.ui.tagsearch.TagSearchFragment
 import com.example.stackexchange.ui.user.UserFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -33,4 +35,10 @@ abstract class MainActivityModule {
 
     @ContributesAndroidInjector
     abstract fun contributeUserFragment(): UserFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeSearchOptionsBottomDialog(): SearchOptionsBottomDialog
+
+    @ContributesAndroidInjector
+    abstract fun contributeTagSearchFragment(): TagSearchFragment
 }

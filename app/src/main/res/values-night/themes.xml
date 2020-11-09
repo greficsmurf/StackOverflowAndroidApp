@@ -23,6 +23,8 @@
         <item name="account_drawable">@drawable/ic_account_circle_24px_night</item>
         <item name="toolbar_color">@color/black</item>
         <item name="sign_out_icon">@drawable/ic_exit_to_app_24px_night</item>
+        <item name="preference_drawable">@drawable/ic_tune_24px_night</item>
+        <item name="clear_drawable">@drawable/ic_clear_24px_night</item>
 
     </style>
     <style name="Theme.StackExchange.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">

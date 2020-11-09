@@ -45,34 +45,38 @@ class UserFragment : BaseFragment() {
                 false
         )
 
-        val questionsAdapter = QuestionsPagedAdapter(object : QuestionsAdapterNavCallback{
-            override fun navigate(navController: NavController, url: String, title: String) {
-                navController.navigate(UserFragmentDirections.actionUserFragmentToQuestionFragment(url, title))
-            }
-
-            override fun navigateToUser(navController: NavController, id: Long) {
-                navController.navigate(UserFragmentDirections.actionUserFragmentSelf(id))
-            }
-        })
+//        val questionsAdapter = QuestionsPagedAdapter(object : QuestionsAdapterNavCallback{
+//            override fun navigate(navController: NavController, url: String, title: String) {
+//                navController.navigate(UserFragmentDirections.actionUserFragmentToQuestionFragment(url, title))
+//            }
+//
+//            override fun navigateToUser(navController: NavController, id: Long) {
+//                navController.navigate(UserFragmentDirections.actionUserFragmentSelf(id))
+//            }
+//
+//            override fun navigateToTagSearch(navController: NavController, tags: List<String>) {
+//                TODO("Not yet implemented")
+//            }
+//        }, requireContext())
 
         vm.setUserId(args.userId)
 
         binding.apply {
             userQuestions.apply {
-                adapter = questionsAdapter
+//                adapter = questionsAdapter
                 layoutManager = LinearLayoutManager(context)
             }
 
             viewModel = vm
             lifecycleOwner = viewLifecycleOwner
         }
-        vm.userQuestionsDataSource.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                viewLifecycleOwner.lifecycleScope.launch {
-                    questionsAdapter.submitData(it)
-                }
-            }
-        })
+//        vm.userQuestionsDataSource.observe(viewLifecycleOwner, Observer {
+//            it?.let {
+//                viewLifecycleOwner.lifecycleScope.launch {
+//                    questionsAdapter.submitData(it)
+//                }
+//            }
+//        })
         return binding.root
     }
 

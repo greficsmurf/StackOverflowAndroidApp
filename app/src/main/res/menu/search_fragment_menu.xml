@@ -4,7 +4,7 @@
     >
     <item
         android:id="@+id/searchBar"
-        app:actionViewClass="com.example.stackexchange.customviews.CleanableEditText"
+        app:actionViewClass="com.example.stackexchange.customviews.PreferencesEditText"
         app:showAsAction="always"
-        android:title="@string/search_menu_title" />
+        android:title="@string/search_menu_title"/>
 </menu>

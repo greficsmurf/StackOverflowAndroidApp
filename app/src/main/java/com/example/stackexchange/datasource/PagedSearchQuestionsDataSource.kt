@@ -26,25 +26,15 @@ import javax.inject.Inject
 class PagedSearchQuestionsDataSource(
     private val stackOverflowService: StackOverflowService,
     private val questionSort: QuestionSort = QuestionSort.Interesting(),
-    private val searchString: String? = null
-) : PagingSource<Int, SearchQuestion>(){
+    private val searchString: String? = null,
+    private val tags: List<String>
+) : BaseDataSource<SearchQuestion>(){
+    private val tagsStr = tags.joinToString(";")
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, SearchQuestion> = try {
-        val nextPage = params.key ?: 1
-        val prevKey = if(nextPage == 1) null else nextPage - 1
-        val data = if(searchString == null){
-            stackOverflowService.getAllQuestions(params.loadSize, questionSort.name, nextPage).questionsApi
-        }else{
-            stackOverflowService.getQuestions(searchString,params.key ?: 1).questionsApi
-        }.map { it.toDomainModel() }
-
-        if(data.isEmpty())
-            LoadResult.Page(data, prevKey, null)
-        else
-            LoadResult.Page(data, prevKey, nextPage + 1)
-    }catch (e: Exception){
-        e.printStackTrace()
-        LoadResult.Error(e)
-    }
+    override suspend fun fetchApi(page: Int, loadSize: Int): List<SearchQuestion> = if(searchString == null){
+        stackOverflowService.getAllQuestions(loadSize, questionSort.name, page).questionsApi
+    }else{
+        stackOverflowService.getQuestions(searchString,page, tags = tagsStr).questionsApi
+    }.map { it.toDomainModel() }
 
 }

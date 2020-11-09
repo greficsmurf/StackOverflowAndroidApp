@@ -14,7 +14,8 @@ import com.example.stackexchange.db.typeconverters.StringListConverter
             SearchQuestionDb::class,
             HotSearchQuestionDb::class,
             WeekSearchQuestionDb::class,
-            MonthSearchQuestionDb::class
+            MonthSearchQuestionDb::class,
+            TagDb::class
         ],
         version = 1
 )
@@ -27,5 +28,6 @@ abstract class AppDatabase : RoomDatabase(){
     abstract fun getHotQuestionDao(): HotQuestionDao
     abstract fun getWeekQuestionDao(): WeekQuestionDao
     abstract fun getMonthQuestionDao(): MonthQuestionDao
+    abstract fun getTagDao(): TagDao
 
 }

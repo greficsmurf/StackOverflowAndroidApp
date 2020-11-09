@@ -25,6 +25,4 @@ class BottomNavigationViewScrollBehavior(
         child.translationY = max(0f, min(child.height.toFloat(), child.translationY + dy))
     }
 
-
-
 }

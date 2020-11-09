@@ -2,6 +2,7 @@ package com.example.stackexchange.di
 
 import android.app.Activity
 import android.app.Application
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -66,7 +67,6 @@ object AppInjector{
                             duration = 500
                         }
                     }
-
                     if(f is Injectable)
                         AndroidSupportInjection.inject(f)
                 }

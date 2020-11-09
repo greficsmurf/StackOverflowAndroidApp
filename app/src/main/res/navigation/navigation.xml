@@ -27,6 +27,9 @@
             android:id="@+id/action_homeFragment_to_authUserFragment"
             app:destination="@id/authUserFragment"
 />
+        <action
+            android:id="@+id/action_homeFragment_to_tagSearchFragment"
+            app:destination="@id/tagSearchFragment" />
     </fragment>
     <fragment
         android:id="@+id/questionFragment"
@@ -52,6 +55,12 @@
         <action
             android:id="@+id/action_searchFragment_to_userFragment"
             app:destination="@id/userFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_tagSearchFragment"
+            app:destination="@id/tagSearchFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_searchOptionsBottomDialog"
+            app:destination="@id/searchOptionsBottomDialog" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -80,5 +89,30 @@
         android:name="com.example.stackexchange.ui.authuser.AuthUserFragment"
         android:label="@string/auth_user_title"
         tools:layout="@layout/fragment_auth_user"/>
+    <fragment
+        android:id="@+id/tagSearchFragment"
+        android:name="com.example.stackexchange.ui.tagsearch.TagSearchFragment"
+        android:label="TagSearchFragment"
+        tools:layout="@layout/fragment_tag_search"
+        >
+        <argument
+            android:name="tags"
+            app:argType="string[]"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_tagSearchFragment_to_questionFragment"
+            app:destination="@id/questionFragment" />
+        <action
+            android:id="@+id/action_tagSearchFragment_to_userFragment"
+            app:destination="@id/userFragment" />
+        <action
+            android:id="@+id/action_tagSearchFragment_self"
+            app:destination="@id/tagSearchFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/searchOptionsBottomDialog"
+        android:name="com.example.stackexchange.ui.search.SearchOptionsBottomDialog"
+        android:label="SearchOptionsBottomDialog"
+        tools:layout="@layout/dialog_search_options"/>
 
 </navigation>

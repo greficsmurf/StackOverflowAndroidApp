@@ -1,10 +1,14 @@
 package com.example.stackexchange.utils
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.net.ConnectivityManager
+import android.util.TypedValue
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
+import com.example.stackexchange.R
 import com.example.stackexchange.vo.Resource
 import java.util.*
 
@@ -31,4 +35,13 @@ fun getResourceByLoadStates(loadStates: CombinedLoadStates): Resource<Nothing>{
 
 fun Long.toDate() = Date().apply { time = this@toDate }
 
-fun Any?.isNull() = this == null
+
+/**
+ *  Gets drawable by its attribute reference
+ */
+fun getDrawableByRef(context: Context, attr: Int): Drawable{
+    val typedValue = TypedValue()
+    context.theme.resolveAttribute(attr, typedValue, true)
+    val imageResId = typedValue.resourceId
+    return ContextCompat.getDrawable(context, imageResId) ?: throw IllegalArgumentException("Cannot load drawable $imageResId")
+}

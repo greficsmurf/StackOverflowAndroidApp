@@ -4,18 +4,25 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
+import android.widget.SearchView
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.stackexchange.R
 import com.example.stackexchange.adapters.recycler.QuestionsPagedAdapter
 import com.example.stackexchange.base.BaseFragment
+import com.example.stackexchange.customviews.PreferencesEditText
 import com.example.stackexchange.databinding.FragmentSearchBinding
+import com.example.stackexchange.interfaces.DefaultCallback
 import com.example.stackexchange.interfaces.QuestionsAdapterNavCallback
 import com.example.stackexchange.utils.getResourceByLoadStates
 import com.example.stackexchange.vo.Resource
@@ -31,7 +38,7 @@ class SearchFragment : BaseFragment(){
     @Inject
     lateinit var vmFactory: ViewModelProvider.Factory
 
-    private val vm: SearchViewModel by viewModels {
+    private val vm: SearchViewModel by activityViewModels {
         vmFactory
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -42,6 +49,7 @@ class SearchFragment : BaseFragment(){
                 container,
                 false
         )
+
         val questionsAdapter = QuestionsPagedAdapter(object : QuestionsAdapterNavCallback{
             override fun navigate(navController: NavController, url: String, title: String) {
                 navController.navigate(SearchFragmentDirections.actionSearchFragmentToQuestionFragment(url, title))
@@ -50,7 +58,11 @@ class SearchFragment : BaseFragment(){
             override fun navigateToUser(navController: NavController, id: Long) {
                 navController.navigate(SearchFragmentDirections.actionSearchFragmentToUserFragment(id))
             }
-        })
+
+            override fun navigateToTagSearch(navController: NavController, tags: List<String>) {
+                navController.navigate(SearchFragmentDirections.actionSearchFragmentToTagSearchFragment(tags.toTypedArray()))
+            }
+        }, requireContext())
 
         binding.apply {
             recyclerQuestions.apply {
@@ -75,14 +87,23 @@ class SearchFragment : BaseFragment(){
         return binding.root
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.search_fragment_menu, menu)
 
         try {
             val menuItem = menu.findItem(R.id.searchBar)
-            val searchView = menuItem.actionView as EditText
+            val searchView = menuItem.actionView as PreferencesEditText
 
             searchView.apply {
+                setOnEditorActionListener { v, actionId, event ->
+                    if (actionId == EditorInfo.IME_ACTION_DONE) {
+                        vm.setSearchText(text.toString())
+                        true
+                    }
+                    else
+                        false
+                }
                 addTextChangedListener(
                         object : TextWatcher {
                             private var timer = Timer()
@@ -121,6 +142,14 @@ class SearchFragment : BaseFragment(){
                                 )
                             }
 
+                        }
+                )
+
+                addPreferenceClickCallback(
+                        object : DefaultCallback{
+                            override fun run() {
+                                this@SearchFragment.findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToSearchOptionsBottomDialog())
+                            }
                         }
                 )
                 width = Int.MAX_VALUE

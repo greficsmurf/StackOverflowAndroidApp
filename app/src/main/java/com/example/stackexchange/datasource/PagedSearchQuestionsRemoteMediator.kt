@@ -13,7 +13,6 @@ import com.example.stackexchange.domain.mappers.toDbModel
 import com.example.stackexchange.domain.mappers.toDomainModel
 import com.example.stackexchange.domain.models.SearchQuestion
 import com.example.stackexchange.repo.QuestionSort
-import com.example.stackexchange.utils.isNull
 import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)

@@ -22,6 +22,8 @@
         <item name="toolbar_color">@color/white</item>
         <item name="account_drawable">@drawable/ic_account_circle_24px</item>
         <item name="sign_out_icon">@drawable/ic_exit_to_app_24px</item>
+        <item name="preference_drawable">@drawable/ic_tune_24px</item>
+        <item name="clear_drawable">@drawable/ic_clear_24px</item>
 
 
         <!-- these should be the correct ones -->

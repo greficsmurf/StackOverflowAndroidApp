@@ -10,6 +10,7 @@ import android.view.MotionEvent
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import com.example.stackexchange.R
+import com.example.stackexchange.utils.getDrawableByRef
 
 open class CleanableEditText : AppCompatEditText, TextWatcher {
     constructor(context: Context)
@@ -19,8 +20,8 @@ open class CleanableEditText : AppCompatEditText, TextWatcher {
     constructor(context: Context, attributeSet: AttributeSet?, defStyleAttr: Int)
             : super(context, attributeSet, defStyleAttr)
 
-    private var isClearIconShown = false
-    private var clearIconDrawable = ContextCompat.getDrawable(context, R.drawable.ic_clear_24px)
+    protected var isClearIconShown = false
+    open var clearIconDrawable: Drawable? = getDrawableByRef(context, R.attr.clear_drawable)
 
     init {
         background = null
@@ -65,7 +66,7 @@ open class CleanableEditText : AppCompatEditText, TextWatcher {
         return super.onTouchEvent(event)
     }
 
-    private fun isClearIconTouched(event: MotionEvent?): Boolean{
+    open fun isClearIconTouched(event: MotionEvent?): Boolean{
         val x = event?.x
 
         return if(x != null){
@@ -81,14 +82,14 @@ open class CleanableEditText : AppCompatEditText, TextWatcher {
         isClearIconShown = false
     }
 
-    private fun showClearIcon(){
+    open fun showClearIcon(){
         if(hasFocus() && !isClearIconShown){
             setDrawableRight(clearIconDrawable)
             isClearIconShown = true
         }
     }
 
-    private fun removeClearIcon(){
+    open fun removeClearIcon(){
         if(isClearIconShown)
         {
             setDrawableRight(null)
@@ -96,7 +97,7 @@ open class CleanableEditText : AppCompatEditText, TextWatcher {
         }
     }
 
-    private fun setDrawableRight(drawable: Drawable?){
+    protected fun setDrawableRight(drawable: Drawable?){
         setCompoundDrawablesWithIntrinsicBounds(
                 compoundDrawables[0],
                 compoundDrawables[1],

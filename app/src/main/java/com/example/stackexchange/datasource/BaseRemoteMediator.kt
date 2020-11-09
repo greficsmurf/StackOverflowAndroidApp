@@ -29,7 +29,7 @@ abstract class BaseRemoteMediator <T> : RemoteMediator<Int, T>() where T: BaseDb
                 data = fetchApi(lastId, state.config.pageSize)
                 appendDb(data)
             } ?: let {
-                data = fetchApi(pageSize = state.config.initialLoadSize)
+                data = fetchApi(pageSize = state.config.initialLoadSize + state.config.pageSize)
                 refreshDb(data)
             }
 

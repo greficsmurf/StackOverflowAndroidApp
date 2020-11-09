@@ -8,12 +8,12 @@ import java.util.*
 
 abstract class BaseDao <M> : IBaseDao<M> where M: BaseDbModel{
     suspend fun insertWithTimestamp(vararg data: M){
-        insert(data.map { it.apply {
-            Date().let { currentDate ->
-                createdAt = currentDate
-                updatedAt = currentDate
+            insert(data.map { it.apply {
+                Date().let { currentDate ->
+                    createdAt = currentDate
+                    updatedAt = currentDate
+                }
             }
-        }
         })
     }
     suspend fun updateWithTimestamp(vararg data: M){

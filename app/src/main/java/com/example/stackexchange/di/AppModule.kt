@@ -84,4 +84,7 @@ class AppModule{
     @Singleton
     @Provides
     fun provideMonthQuestionDao(db: AppDatabase) = db.getMonthQuestionDao()
+    @Singleton
+    @Provides
+    fun provideTagDao(db: AppDatabase) = db.getTagDao()
 }
