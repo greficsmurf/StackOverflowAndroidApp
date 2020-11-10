@@ -15,7 +15,8 @@
     <string name="auth_user_title">Profile</string>
     <string name="search_options_dialog_title">Search options</string>>
     <string name="tag_options_title">Tags to look for:</string>
-
+    <string name="tag_search_fragment_title">Tag search result</string>
+    <string name="dynamic_tag_search_fragment_title">Tag search result for <u>%s</u></string>
 
 
     <string name="error_indication">Error occurred</string>

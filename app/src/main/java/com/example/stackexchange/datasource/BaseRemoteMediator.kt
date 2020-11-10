@@ -7,6 +7,7 @@ import com.example.stackexchange.db.models.UserDb
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
+import timber.log.Timber
 import java.lang.Exception
 
 @ExperimentalPagingApi
@@ -29,12 +30,14 @@ abstract class BaseRemoteMediator <T> : RemoteMediator<Int, T>() where T: BaseDb
                 data = fetchApi(lastId, state.config.pageSize)
                 appendDb(data)
             } ?: let {
-                data = fetchApi(pageSize = state.config.initialLoadSize + state.config.pageSize)
-                refreshDb(data)
+                if(shouldFetchApi()){
+                    data = fetchApi(pageSize = state.config.initialLoadSize + state.config.pageSize)
+                    refreshDb(data)
+                }
             }
 
-            return MediatorResult.Success(data.isNullOrEmpty())
 
+            return MediatorResult.Success(data.isNullOrEmpty())
         }catch (e: Exception){
             e.printStackTrace()
             return MediatorResult.Error(e)
@@ -47,4 +50,5 @@ abstract class BaseRemoteMediator <T> : RemoteMediator<Int, T>() where T: BaseDb
     abstract suspend fun fetchApi(lastId: Long = 0, pageSize: Int): List<T>
     abstract suspend fun appendDb(list: List<T>)
     abstract suspend fun refreshDb(list: List<T>)
+    protected open suspend fun shouldFetchApi() = true
 }

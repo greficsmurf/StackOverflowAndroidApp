@@ -4,6 +4,7 @@ import android.accounts.Account
 import android.accounts.AccountManager
 import android.net.Uri
 import android.os.Bundle
+import android.text.Spanned
 import android.webkit.CookieManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -33,6 +34,10 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     private val appBarConfig: AppBarConfiguration by lazy {
         AppBarConfiguration(navController.graph)
     }
+
+    private val toolbar: Toolbar by lazy{
+        findViewById<Toolbar>(R.id.toolbar)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -57,7 +62,6 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
             }
         }
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         val bottomNavBar = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         toolbar.setTitle(R.string.home_title)
         setSupportActionBar(toolbar)
@@ -67,6 +71,12 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         CookieManager.getInstance().setCookie(getString(R.string.stackoverflow_domain), getString(R.string.cookie_string))
     }
 
+    fun setToolbarTitle(title: String){
+        toolbar.title = title
+    }
+    fun setToolbarTitle(title: Spanned){
+        toolbar.title = title
+    }
     override fun supportFragmentInjector() = dispatchingAndroidInjector
 }
 

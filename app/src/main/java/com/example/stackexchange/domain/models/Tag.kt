@@ -1,9 +1,9 @@
 package com.example.stackexchange.domain.models
 
 data class Tag(
-        val hasSynonyms: Boolean,
-        val isModeratorOnly: Boolean,
-        val isRequired: Boolean,
-        val count: Long,
+        val hasSynonyms: Boolean = false,
+        val isModeratorOnly: Boolean = false,
+        val isRequired: Boolean = false,
+        val count: Long = 0,
         val name: String
 )

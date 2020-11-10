@@ -15,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.stackexchange.R
@@ -22,6 +23,7 @@ import com.example.stackexchange.adapters.recycler.QuestionsPagedAdapter
 import com.example.stackexchange.base.BaseFragment
 import com.example.stackexchange.customviews.PreferencesEditText
 import com.example.stackexchange.databinding.FragmentSearchBinding
+import com.example.stackexchange.domain.models.Tag
 import com.example.stackexchange.interfaces.DefaultCallback
 import com.example.stackexchange.interfaces.QuestionsAdapterNavCallback
 import com.example.stackexchange.utils.getResourceByLoadStates
@@ -41,6 +43,8 @@ class SearchFragment : BaseFragment(){
     private val vm: SearchViewModel by activityViewModels {
         vmFactory
     }
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
         val binding: FragmentSearchBinding = DataBindingUtil.inflate(

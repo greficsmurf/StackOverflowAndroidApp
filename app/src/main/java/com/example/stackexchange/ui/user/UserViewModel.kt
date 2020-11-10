@@ -24,9 +24,9 @@ class UserViewModel @Inject constructor(
     }
 
     // to be changed, temp solution
-    val userQuestionsDataSource = _userId.switchMap {
-        userRepo.getUserQuestionsDataSource(it, 20).cachedIn(viewModelScope)
-    }
+//    val userQuestionsDataSource = _userId.switchMap {
+//        userRepo.getUserQuestionsDataSource(it, 20).cachedIn(viewModelScope)
+//    }
 
     fun setUserId(id: Long){
         _userId.value = id

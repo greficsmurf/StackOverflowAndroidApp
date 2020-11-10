@@ -15,6 +15,7 @@ import com.example.stackexchange.domain.mappers.toDomainModel
 import com.example.stackexchange.domain.models.SearchQuestion
 import com.example.stackexchange.domain.models.User
 import com.example.stackexchange.interfaces.ResourceCallback
+import com.example.stackexchange.utils.timeElapsed
 import com.example.stackexchange.vo.NetworkDatabaseResource
 import com.example.stackexchange.vo.NetworkResource
 import com.example.stackexchange.vo.Resource
@@ -31,7 +32,7 @@ class UserRepo @Inject constructor(
         private val userDao: UserDao,
         private val application: BaseApplication
 ){
-    private val REFRESH_INTERVAL = 60 * 60 * 1000L
+    private val REFRESH_TIME = 60 * 60 * 1000L
     fun getUserResource(id: Long) = object : NetworkDatabaseResource<UsersApi, UserDb, User>(){
         override suspend fun fetchApi(): UsersApi = stackOverflowService.getUser(id)
 
@@ -40,7 +41,7 @@ class UserRepo @Inject constructor(
         override fun toDomainModelDb(data: UserDb): User = data.toDomainModel()
 
         override fun shouldFetchApi(data: UserDb?): Boolean = data?.let {
-            (System.currentTimeMillis() - (it.updatedAt?.time ?: 0)) > REFRESH_INTERVAL
+            it.updatedAt.timeElapsed() > REFRESH_TIME
         } ?: true
 
         override suspend fun onDbSave(data: User) = userDao.insertWithTimestamp(data.toDbModel())

@@ -1,6 +1,8 @@
 package com.example.stackexchange.ui.tagsearch
 
+import android.os.Build
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.stackexchange.MainActivity
 import com.example.stackexchange.R
 import com.example.stackexchange.adapters.recycler.QuestionsPagedAdapter
 import com.example.stackexchange.base.BaseFragment
@@ -42,6 +45,9 @@ class TagSearchFragment : BaseFragment(){
         )
 
         vm.setTags(args.tags?.toList())
+        args.tags?.firstOrNull()?.let {
+            (activity as MainActivity).setToolbarTitle(getString(R.string.dynamic_tag_search_fragment_title, it))
+        }
         val questionsAdapter = QuestionsPagedAdapter(object : QuestionsAdapterNavCallback{
             override fun navigate(navController: NavController, url: String, title: String) {
                 navController.navigate(TagSearchFragmentDirections.actionTagSearchFragmentToQuestionFragment(url, title))

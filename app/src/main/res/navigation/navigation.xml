@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_homeFragment_to_tagSearchFragment"
             app:destination="@id/tagSearchFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/questionFragment"
@@ -92,7 +95,7 @@
     <fragment
         android:id="@+id/tagSearchFragment"
         android:name="com.example.stackexchange.ui.tagsearch.TagSearchFragment"
-        android:label="TagSearchFragment"
+        android:label="@string/tag_search_fragment_title"
         tools:layout="@layout/fragment_tag_search"
         >
         <argument

@@ -22,7 +22,6 @@ fun getResourceByLoadStates(loadStates: CombinedLoadStates): Resource<Nothing>{
         loadStates.append is LoadState.Loading -> return Resource.loading(null)
         loadStates.refresh is LoadState.Loading -> return Resource.loading(null)
     }
-
     when {
         loadStates.prepend is LoadState.Error -> return Resource.failed(null)
         loadStates.append is LoadState.Error -> return Resource.failed(null)
@@ -45,3 +44,6 @@ fun getDrawableByRef(context: Context, attr: Int): Drawable{
     val imageResId = typedValue.resourceId
     return ContextCompat.getDrawable(context, imageResId) ?: throw IllegalArgumentException("Cannot load drawable $imageResId")
 }
+
+fun Date?.timeElapsed(): Long = Date().time - (this?.time ?: 0)
+

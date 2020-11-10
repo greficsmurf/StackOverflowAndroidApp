@@ -27,8 +27,8 @@ abstract class NetworkDatabaseResource<ApiT, DbT, DomainT> {
                     }
                 }
             }catch (e: Exception){
+                e.printStackTrace()
                 emit(Resource.failed(null))
-                cancel()
             }
         }
     }

@@ -4,6 +4,7 @@ import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Query
 import com.example.stackexchange.db.models.HotSearchQuestionDb
+import com.example.stackexchange.db.models.MonthSearchQuestionDb
 import com.example.stackexchange.db.models.SearchQuestionDb
 import com.example.stackexchange.db.models.WeekSearchQuestionDb
 
@@ -16,10 +17,13 @@ abstract class WeekQuestionDao : BaseDao<WeekSearchQuestionDb>(){
     @Query("SELECT * FROM week_search_question ORDER BY id")
     abstract fun getPagingSource(): PagingSource<Int, WeekSearchQuestionDb>
 
+    @Query("SELECT * FROM week_search_question ORDER BY id LIMIT 1")
+    abstract suspend fun getFirstItem(): WeekSearchQuestionDb?
+
     suspend fun deleteAndInsert(data: List<WeekSearchQuestionDb>){
         delete()
         resetSequence("week_search_question")
-        insert(data)
+        insertWithTimestamp(*data.toTypedArray())
     }
 
 }

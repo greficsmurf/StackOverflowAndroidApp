@@ -20,11 +20,13 @@ abstract class HotQuestionDao : BaseDao<HotSearchQuestionDb>(){
     @Query("SELECT * FROM hot_search_question ORDER BY id")
     abstract fun getPagingSource(): PagingSource<Int, HotSearchQuestionDb>
 
+    @Query("SELECT * FROM hot_search_question ORDER BY id LIMIT 1")
+    abstract suspend fun getFirstItem(): HotSearchQuestionDb?
 
     suspend fun deleteAndInsert(data: List<HotSearchQuestionDb>){
         delete()
         resetSequence("hot_search_question")
-        insert(data)
+        insertWithTimestamp(*data.toTypedArray())
     }
 
 }
