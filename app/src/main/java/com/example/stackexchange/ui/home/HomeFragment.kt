@@ -27,6 +27,7 @@ import com.example.stackexchange.di.ViewModelFactory
 import com.example.stackexchange.domain.models.User
 import com.example.stackexchange.interfaces.QuestionsAdapterNavCallback
 import com.example.stackexchange.repo.QuestionSort
+import com.example.stackexchange.utils.navigateSafe
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.Dispatchers
@@ -71,12 +72,12 @@ class HomeFragment : Fragment(), Injectable {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.fragment_home_menu, menu)
         menu.findItem(R.id.settings_menu).setOnMenuItemClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
+            findNavController().navigateSafe(HomeFragmentDirections.actionHomeFragmentToSettingsFragment())
             true
         }
 
         menu.findItem(R.id.account_menu).setOnMenuItemClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAuthUserFragment())
+            findNavController().navigateSafe(HomeFragmentDirections.actionHomeFragmentToAuthUserFragment())
             true
         }
     }

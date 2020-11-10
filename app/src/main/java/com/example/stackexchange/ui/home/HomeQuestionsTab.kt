@@ -21,6 +21,7 @@ import com.example.stackexchange.interfaces.QuestionsAdapterNavCallback
 import com.example.stackexchange.repo.QuestionSort
 import com.example.stackexchange.ui.tagsearch.TagSearchFragmentDirections
 import com.example.stackexchange.utils.getResourceByLoadStates
+import com.example.stackexchange.utils.navigateSafe
 import kotlinx.android.synthetic.main.tab_questions.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -58,15 +59,15 @@ class HomeQuestionsTab : BaseFragment() {
         val questionsAdapter = QuestionsPagedAdapter(
                 object : QuestionsAdapterNavCallback {
                     override fun navigate(navController: NavController, url: String, title: String) {
-                        navController.navigate(HomeFragmentDirections.actionHomeFragmentToQuestionFragment(url, title))
+                        navController.navigateSafe(HomeFragmentDirections.actionHomeFragmentToQuestionFragment(url, title))
                     }
 
                     override fun navigateToUser(navController: NavController, id: Long) {
-                        navController.navigate(HomeFragmentDirections.actionHomeFragmentToUserFragment2(id))
+                        navController.navigateSafe(HomeFragmentDirections.actionHomeFragmentToUserFragment2(id))
                     }
 
                     override fun navigateToTagSearch(navController: NavController, tags: List<String>) {
-                        navController.navigate(HomeFragmentDirections.actionHomeFragmentToTagSearchFragment(tags.toTypedArray()))
+                        navController.navigateSafe(HomeFragmentDirections.actionHomeFragmentToTagSearchFragment(tags.toTypedArray()))
                     }
                 },
                 requireContext()

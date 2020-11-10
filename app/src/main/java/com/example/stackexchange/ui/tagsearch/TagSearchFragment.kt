@@ -21,6 +21,7 @@ import com.example.stackexchange.base.BaseFragment
 import com.example.stackexchange.databinding.FragmentTagSearchBinding
 import com.example.stackexchange.interfaces.QuestionsAdapterNavCallback
 import com.example.stackexchange.utils.getResourceByLoadStates
+import com.example.stackexchange.utils.navigateSafe
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -50,15 +51,15 @@ class TagSearchFragment : BaseFragment(){
         }
         val questionsAdapter = QuestionsPagedAdapter(object : QuestionsAdapterNavCallback{
             override fun navigate(navController: NavController, url: String, title: String) {
-                navController.navigate(TagSearchFragmentDirections.actionTagSearchFragmentToQuestionFragment(url, title))
+                navController.navigateSafe(TagSearchFragmentDirections.actionTagSearchFragmentToQuestionFragment(url, title))
             }
 
             override fun navigateToUser(navController: NavController, id: Long) {
-                navController.navigate(TagSearchFragmentDirections.actionTagSearchFragmentToUserFragment(id))
+                navController.navigateSafe(TagSearchFragmentDirections.actionTagSearchFragmentToUserFragment(id))
             }
 
             override fun navigateToTagSearch(navController: NavController, tags: List<String>) {
-                navController.navigate(TagSearchFragmentDirections.actionTagSearchFragmentSelf(tags.toTypedArray()))
+                navController.navigateSafe(TagSearchFragmentDirections.actionTagSearchFragmentSelf(tags.toTypedArray()))
             }
         }, requireContext())
 

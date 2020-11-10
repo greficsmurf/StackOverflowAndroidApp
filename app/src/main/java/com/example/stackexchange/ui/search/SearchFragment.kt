@@ -27,6 +27,7 @@ import com.example.stackexchange.domain.models.Tag
 import com.example.stackexchange.interfaces.DefaultCallback
 import com.example.stackexchange.interfaces.QuestionsAdapterNavCallback
 import com.example.stackexchange.utils.getResourceByLoadStates
+import com.example.stackexchange.utils.navigateSafe
 import com.example.stackexchange.vo.Resource
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collect
@@ -56,15 +57,15 @@ class SearchFragment : BaseFragment(){
 
         val questionsAdapter = QuestionsPagedAdapter(object : QuestionsAdapterNavCallback{
             override fun navigate(navController: NavController, url: String, title: String) {
-                navController.navigate(SearchFragmentDirections.actionSearchFragmentToQuestionFragment(url, title))
+                navController.navigateSafe(SearchFragmentDirections.actionSearchFragmentToQuestionFragment(url, title))
             }
 
             override fun navigateToUser(navController: NavController, id: Long) {
-                navController.navigate(SearchFragmentDirections.actionSearchFragmentToUserFragment(id))
+                navController.navigateSafe(SearchFragmentDirections.actionSearchFragmentToUserFragment(id))
             }
 
             override fun navigateToTagSearch(navController: NavController, tags: List<String>) {
-                navController.navigate(SearchFragmentDirections.actionSearchFragmentToTagSearchFragment(tags.toTypedArray()))
+                navController.navigateSafe(SearchFragmentDirections.actionSearchFragmentToTagSearchFragment(tags.toTypedArray()))
             }
         }, requireContext())
 
@@ -152,7 +153,7 @@ class SearchFragment : BaseFragment(){
                 addPreferenceClickCallback(
                         object : DefaultCallback{
                             override fun run() {
-                                this@SearchFragment.findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToSearchOptionsBottomDialog())
+                                this@SearchFragment.findNavController().navigateSafe(SearchFragmentDirections.actionSearchFragmentToSearchOptionsBottomDialog())
                             }
                         }
                 )

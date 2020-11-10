@@ -6,10 +6,13 @@ import android.net.ConnectivityManager
 import android.util.TypedValue
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.NavController
+import androidx.navigation.NavDirections
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import com.example.stackexchange.R
 import com.example.stackexchange.vo.Resource
+import java.lang.Exception
 import java.util.*
 
 fun <T> MutableLiveData<T>.forceRefresh(){
@@ -47,3 +50,10 @@ fun getDrawableByRef(context: Context, attr: Int): Drawable{
 
 fun Date?.timeElapsed(): Long = Date().time - (this?.time ?: 0)
 
+fun NavController.navigateSafe(direction: NavDirections){
+    try {
+        navigate(direction)
+    }catch (e: Exception){
+
+    }
+}
