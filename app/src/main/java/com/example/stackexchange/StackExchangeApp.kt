@@ -23,9 +23,10 @@ import javax.inject.Inject
 
 class StackExchangeApp : BaseApplication() {
 
+
+
     override fun onCreate() {
         super.onCreate()
-
         val preferences = PreferenceManager.getDefaultSharedPreferences(this)
         initThemePreference(preferences)
     }
@@ -40,5 +41,4 @@ class StackExchangeApp : BaseApplication() {
                 AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         }
     }
-
 }

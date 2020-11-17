@@ -25,7 +25,6 @@ object AppInjector{
                     inject(app)
                 }
 
-
         app.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks{
             override fun onActivityPaused(activity: Activity) {
             }

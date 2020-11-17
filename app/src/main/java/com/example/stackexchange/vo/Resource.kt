@@ -1,6 +1,9 @@
 package com.example.stackexchange.vo
 
+import com.example.stackexchange.base.BaseApplication
 import com.example.stackexchange.interfaces.ResourceCallback
+import java.lang.Exception
+import java.net.UnknownHostException
 
 data class Resource<T>(
         val data: T?,
@@ -33,5 +36,13 @@ data class Resource<T>(
                 msg,
                 callback
         )
+
+        fun <T> failedEx(e: Exception): Resource<T>{
+            if(e is UnknownHostException){
+                return failed(null, null, e.localizedMessage ?: "")
+            }
+
+            return failed(null)
+        }
     }
 }

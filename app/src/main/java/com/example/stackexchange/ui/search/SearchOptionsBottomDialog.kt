@@ -46,11 +46,11 @@ class SearchOptionsBottomDialog : BottomSheetDialogFragment(), Injectable{
             }
             searchBtn.setOnClickListener {
                 vm.refresh()
-                dismiss()
+                findNavController().popBackStack()
             }
+            resource = vm.tagsResource
             lifecycleOwner = viewLifecycleOwner
         }
-
         vm.tags.observe(viewLifecycleOwner, Observer {
             if(!it.isNullOrEmpty()){
                 tagAdapter.submitList(it)

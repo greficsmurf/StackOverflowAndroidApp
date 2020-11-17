@@ -27,7 +27,7 @@ class PagedSearchQuestionsRemoteMediator @Inject constructor(
 
     var questionSort: QuestionSort = QuestionSort.Interesting()
 
-    private val REFRESH_TIME = 1000 * 60 * 60 * 2L
+    private val REFRESH_TIME = 1000 * 60 * 60 * 1L
 
     override suspend fun fetchApi(lastId: Long, pageSize: Int): List<BaseSearchQuestionDb>{
         val page = lastId / pageSize

@@ -28,7 +28,7 @@ abstract class NetworkDatabaseResource<ApiT, DbT, DomainT> {
                 }
             }catch (e: Exception){
                 e.printStackTrace()
-                emit(Resource.failed(null))
+                emit(onError(e))
             }
         }
     }
@@ -44,4 +44,6 @@ abstract class NetworkDatabaseResource<ApiT, DbT, DomainT> {
 
     abstract fun shouldFetchApi(data: DbT?): Boolean
     abstract suspend fun onDbSave(data: DomainT)
+
+    protected open fun onError(e: Exception): Resource<DomainT> = Resource.failedEx(e)
 }

@@ -29,6 +29,7 @@
             android:layout_height="match_parent"
             >
             <include
+                app:message="@{resource.msg}"
                 layout="@layout/error_layout"
                 />
         </FrameLayout>

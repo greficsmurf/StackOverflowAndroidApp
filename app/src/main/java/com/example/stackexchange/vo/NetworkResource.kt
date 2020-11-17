@@ -23,5 +23,5 @@ abstract class NetworkResource<ApiT, DomainT> {
     abstract suspend fun fetch(): ApiT
     abstract fun toDomainModel(data: ApiT): DomainT
 
-    open fun onError(e: Exception): Resource<DomainT> = Resource.failed(null)
+    protected open fun onError(e: Exception): Resource<DomainT> = Resource.failedEx(e)
 }

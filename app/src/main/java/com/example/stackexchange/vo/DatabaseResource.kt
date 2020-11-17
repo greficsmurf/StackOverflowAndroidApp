@@ -14,7 +14,7 @@ abstract class DatabaseResource<DbT, DomainT>{
                 emit(Resource.loaded(toDomainModel(dbRes)))
             }
         }catch (e: Exception){
-            emit(Resource.failed(null))
+            emit(onError(e))
         }
     }
 
@@ -23,4 +23,6 @@ abstract class DatabaseResource<DbT, DomainT>{
 
     abstract suspend fun fetch(): Flow<DbT>
     abstract fun toDomainModel(data: DbT): DomainT
+
+    protected open fun onError(e: Exception): Resource<DomainT> = Resource.failedEx(e)
 }

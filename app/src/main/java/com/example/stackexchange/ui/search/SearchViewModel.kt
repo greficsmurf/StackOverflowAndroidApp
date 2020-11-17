@@ -14,6 +14,9 @@ import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+ *  This ViewModel is shared between SearchFragment and SearchOptionsBottomDialog
+ */
 class SearchViewModel @Inject constructor(
         private val repo: SearchRepo
 ): ViewModel(){
@@ -25,7 +28,7 @@ class SearchViewModel @Inject constructor(
         repo.getSearchedQuestionsDataSource(it, 20, tags = selectedTagList.map { tag-> tag.name }).cachedIn(viewModelScope)
     }
 
-    private val tagsResource = repo.getPopularTags().asLiveData()
+    val tagsResource = repo.getPopularTags().asLiveData()
 
     val tags = tagsResource.map {
         it.data

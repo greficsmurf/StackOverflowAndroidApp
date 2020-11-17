@@ -10,6 +10,8 @@ import android.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
@@ -59,11 +61,9 @@ class SearchFragment : BaseFragment(){
             override fun navigate(navController: NavController, url: String, title: String) {
                 navController.navigateSafe(SearchFragmentDirections.actionSearchFragmentToQuestionFragment(url, title))
             }
-
             override fun navigateToUser(navController: NavController, id: Long) {
                 navController.navigateSafe(SearchFragmentDirections.actionSearchFragmentToUserFragment(id))
             }
-
             override fun navigateToTagSearch(navController: NavController, tags: List<String>) {
                 navController.navigateSafe(SearchFragmentDirections.actionSearchFragmentToTagSearchFragment(tags.toTypedArray()))
             }
@@ -80,6 +80,19 @@ class SearchFragment : BaseFragment(){
         vm.questionsDataSource.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             viewLifecycleOwner.lifecycleScope.launch {
                 questionsAdapter.submitData(it)
+            }
+        })
+
+        /**
+         *  (Workaround for keeping tagsResource coroutine alive in options menu)
+         *
+         *  SearchOptionsBottomDialog observes tagsResource via its viewLifecycleOwner, so coroutine gets cancelled,
+         *  and connecting to database is required again, this line keeps coroutine alive, so tagsResource can be accessed
+         *  without delay
+         *
+         */
+        vm.tagsResource.observe(viewLifecycleOwner, object : Observer<Resource<List<Tag>>>{
+            override fun onChanged(t: Resource<List<Tag>>?) {
             }
         })
 

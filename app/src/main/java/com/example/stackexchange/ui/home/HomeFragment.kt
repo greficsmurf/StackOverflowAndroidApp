@@ -33,6 +33,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.lang.RuntimeException
 import javax.inject.Inject
 
 class HomeFragment : Fragment(), Injectable {

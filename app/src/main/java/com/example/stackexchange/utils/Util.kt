@@ -3,6 +3,7 @@ package com.example.stackexchange.utils
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.util.TypedValue
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
@@ -28,7 +29,7 @@ fun getResourceByLoadStates(loadStates: CombinedLoadStates): Resource<Nothing>{
     when {
         loadStates.prepend is LoadState.Error -> return Resource.failed(null)
         loadStates.append is LoadState.Error -> return Resource.failed(null)
-        loadStates.refresh is LoadState.Error -> return Resource.failed(null)
+        loadStates.refresh is LoadState.Error -> return Resource.failed(null, msg = (loadStates.refresh as LoadState.Error).error.localizedMessage ?: "")
     }
 
 
@@ -54,6 +55,6 @@ fun NavController.navigateSafe(direction: NavDirections){
     try {
         navigate(direction)
     }catch (e: Exception){
-
     }
 }
+
